@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>FusionScriptClient</AssemblyName>
+    <RootNamespace>RxdSolutions.FusionScript</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.6.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.6.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataServiceInterface\DataServiceInterface.csproj" />
+  </ItemGroup>
+
+</Project>

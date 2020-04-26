@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Editor": {
+      "commandName": "Project",
+      "commandLineArgs": "--server net.tcp://WGSB-RSAU02.BHDGSYSTEMATIC.COM:58769/FusionMacro/1/2436 --id 3"
+    }
+  }
+}

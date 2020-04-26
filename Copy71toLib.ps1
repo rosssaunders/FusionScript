@@ -1,0 +1,15 @@
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\DevExpress.XtraTreeList.v11.2\bin\Debug\net40\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.API.Configuration\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Windows\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Windows.Ribbon\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Windows.Widgets.Core\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Windows.Widgets\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\SophisConfiguration\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\SophisDotNetToolkit\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\SophisDotNetToolkitGUI\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\SophisDotNetTools\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\SophisDotNetValue\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\SophisPortfoliosGUI\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Core.Data\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Event.Core\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\
+Get-ChildItem C:\Users\rosss\source\repos\DevOps\FusionMocks\src\Sophis.Event.Risque\bin\Debug_7_1\net452\*.* | Copy-Item -Destination libs\

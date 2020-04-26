@@ -1,0 +1,286 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
+    <AssemblyName>FusionScriptEditor</AssemblyName>
+    <RootNamespace>RxdSolutions.FusionScript</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="app.ico" />
+    <None Remove="icon.ico" />
+    <None Remove="Monaco\base\worker\workerMain.js" />
+    <None Remove="Monaco\basic-languages\apex\apex.js" />
+    <None Remove="Monaco\basic-languages\azcli\azcli.js" />
+    <None Remove="Monaco\basic-languages\bat\bat.js" />
+    <None Remove="Monaco\basic-languages\clojure\clojure.js" />
+    <None Remove="Monaco\basic-languages\coffee\coffee.js" />
+    <None Remove="Monaco\basic-languages\cpp\cpp.js" />
+    <None Remove="Monaco\basic-languages\csharp\csharp.js" />
+    <None Remove="Monaco\basic-languages\csp\csp.js" />
+    <None Remove="Monaco\basic-languages\css\css.js" />
+    <None Remove="Monaco\basic-languages\dockerfile\dockerfile.js" />
+    <None Remove="Monaco\basic-languages\fsharp\fsharp.js" />
+    <None Remove="Monaco\basic-languages\go\go.js" />
+    <None Remove="Monaco\basic-languages\graphql\graphql.js" />
+    <None Remove="Monaco\basic-languages\handlebars\handlebars.js" />
+    <None Remove="Monaco\basic-languages\html\html.js" />
+    <None Remove="Monaco\basic-languages\ini\ini.js" />
+    <None Remove="Monaco\basic-languages\javascript\javascript.js" />
+    <None Remove="Monaco\basic-languages\java\java.js" />
+    <None Remove="Monaco\basic-languages\kotlin\kotlin.js" />
+    <None Remove="Monaco\basic-languages\less\less.js" />
+    <None Remove="Monaco\basic-languages\lua\lua.js" />
+    <None Remove="Monaco\basic-languages\markdown\markdown.js" />
+    <None Remove="Monaco\basic-languages\msdax\msdax.js" />
+    <None Remove="Monaco\basic-languages\mysql\mysql.js" />
+    <None Remove="Monaco\basic-languages\objective-c\objective-c.js" />
+    <None Remove="Monaco\basic-languages\pascal\pascal.js" />
+    <None Remove="Monaco\basic-languages\perl\perl.js" />
+    <None Remove="Monaco\basic-languages\pgsql\pgsql.js" />
+    <None Remove="Monaco\basic-languages\php\php.js" />
+    <None Remove="Monaco\basic-languages\postiats\postiats.js" />
+    <None Remove="Monaco\basic-languages\powerquery\powerquery.js" />
+    <None Remove="Monaco\basic-languages\powershell\powershell.js" />
+    <None Remove="Monaco\basic-languages\pug\pug.js" />
+    <None Remove="Monaco\basic-languages\python\python.js" />
+    <None Remove="Monaco\basic-languages\razor\razor.js" />
+    <None Remove="Monaco\basic-languages\redis\redis.js" />
+    <None Remove="Monaco\basic-languages\redshift\redshift.js" />
+    <None Remove="Monaco\basic-languages\ruby\ruby.js" />
+    <None Remove="Monaco\basic-languages\rust\rust.js" />
+    <None Remove="Monaco\basic-languages\r\r.js" />
+    <None Remove="Monaco\basic-languages\sb\sb.js" />
+    <None Remove="Monaco\basic-languages\scheme\scheme.js" />
+    <None Remove="Monaco\basic-languages\scss\scss.js" />
+    <None Remove="Monaco\basic-languages\shell\shell.js" />
+    <None Remove="Monaco\basic-languages\solidity\solidity.js" />
+    <None Remove="Monaco\basic-languages\sql\sql.js" />
+    <None Remove="Monaco\basic-languages\st\st.js" />
+    <None Remove="Monaco\basic-languages\swift\swift.js" />
+    <None Remove="Monaco\basic-languages\tcl\tcl.js" />
+    <None Remove="Monaco\basic-languages\typescript\typescript.js" />
+    <None Remove="Monaco\basic-languages\vb\vb.js" />
+    <None Remove="Monaco\basic-languages\xml\xml.js" />
+    <None Remove="Monaco\basic-languages\yaml\yaml.js" />
+    <None Remove="Monaco\diffviewer.html" />
+    <None Remove="Monaco\editor.html" />
+    <None Remove="Monaco\editor\editor.main.css" />
+    <None Remove="Monaco\editor\editor.main.js" />
+    <None Remove="Monaco\editor\editor.main.nls.de.js" />
+    <None Remove="Monaco\editor\editor.main.nls.es.js" />
+    <None Remove="Monaco\editor\editor.main.nls.fr.js" />
+    <None Remove="Monaco\editor\editor.main.nls.it.js" />
+    <None Remove="Monaco\editor\editor.main.nls.ja.js" />
+    <None Remove="Monaco\editor\editor.main.nls.js" />
+    <None Remove="Monaco\editor\editor.main.nls.ko.js" />
+    <None Remove="Monaco\editor\editor.main.nls.ru.js" />
+    <None Remove="Monaco\editor\editor.main.nls.zh-cn.js" />
+    <None Remove="Monaco\editor\editor.main.nls.zh-tw.js" />
+    <None Remove="Monaco\language\css\cssMode.js" />
+    <None Remove="Monaco\language\css\cssWorker.js" />
+    <None Remove="Monaco\language\html\htmlMode.js" />
+    <None Remove="Monaco\language\html\htmlWorker.js" />
+    <None Remove="Monaco\language\json\jsonMode.js" />
+    <None Remove="Monaco\language\json\jsonWorker.js" />
+    <None Remove="Monaco\language\typescript\tsMode.js" />
+    <None Remove="Monaco\language\typescript\tsWorker.js" />
+    <None Remove="Monaco\loader.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="app.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\base\worker\workerMain.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\basic-languages\apex\apex.js" />
+    <Content Include="Monaco\basic-languages\azcli\azcli.js" />
+    <Content Include="Monaco\basic-languages\bat\bat.js" />
+    <Content Include="Monaco\basic-languages\clojure\clojure.js" />
+    <Content Include="Monaco\basic-languages\coffee\coffee.js" />
+    <Content Include="Monaco\basic-languages\cpp\cpp.js" />
+    <Content Include="Monaco\basic-languages\csharp\csharp.js" />
+    <Content Include="Monaco\basic-languages\csp\csp.js" />
+    <Content Include="Monaco\basic-languages\css\css.js" />
+    <Content Include="Monaco\basic-languages\dockerfile\dockerfile.js" />
+    <Content Include="Monaco\basic-languages\fsharp\fsharp.js" />
+    <Content Include="Monaco\basic-languages\go\go.js" />
+    <Content Include="Monaco\basic-languages\graphql\graphql.js" />
+    <Content Include="Monaco\basic-languages\handlebars\handlebars.js" />
+    <Content Include="Monaco\basic-languages\html\html.js" />
+    <Content Include="Monaco\basic-languages\ini\ini.js" />
+    <Content Include="Monaco\basic-languages\javascript\javascript.js" />
+    <Content Include="Monaco\basic-languages\java\java.js" />
+    <Content Include="Monaco\basic-languages\kotlin\kotlin.js" />
+    <Content Include="Monaco\basic-languages\less\less.js" />
+    <Content Include="Monaco\basic-languages\lua\lua.js" />
+    <Content Include="Monaco\basic-languages\markdown\markdown.js" />
+    <Content Include="Monaco\basic-languages\msdax\msdax.js" />
+    <Content Include="Monaco\basic-languages\mysql\mysql.js" />
+    <Content Include="Monaco\basic-languages\objective-c\objective-c.js" />
+    <Content Include="Monaco\basic-languages\pascal\pascal.js" />
+    <Content Include="Monaco\basic-languages\perl\perl.js" />
+    <Content Include="Monaco\basic-languages\pgsql\pgsql.js" />
+    <Content Include="Monaco\basic-languages\php\php.js" />
+    <Content Include="Monaco\basic-languages\postiats\postiats.js" />
+    <Content Include="Monaco\basic-languages\powerquery\powerquery.js" />
+    <Content Include="Monaco\basic-languages\powershell\powershell.js" />
+    <Content Include="Monaco\basic-languages\pug\pug.js" />
+    <Content Include="Monaco\basic-languages\python\python.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\basic-languages\razor\razor.js" />
+    <Content Include="Monaco\basic-languages\redis\redis.js" />
+    <Content Include="Monaco\basic-languages\redshift\redshift.js" />
+    <Content Include="Monaco\basic-languages\ruby\ruby.js" />
+    <Content Include="Monaco\basic-languages\rust\rust.js" />
+    <Content Include="Monaco\basic-languages\r\r.js" />
+    <Content Include="Monaco\basic-languages\sb\sb.js" />
+    <Content Include="Monaco\basic-languages\scheme\scheme.js" />
+    <Content Include="Monaco\basic-languages\scss\scss.js" />
+    <Content Include="Monaco\basic-languages\shell\shell.js" />
+    <Content Include="Monaco\basic-languages\solidity\solidity.js" />
+    <Content Include="Monaco\basic-languages\sql\sql.js" />
+    <Content Include="Monaco\basic-languages\st\st.js" />
+    <Content Include="Monaco\basic-languages\swift\swift.js" />
+    <Content Include="Monaco\basic-languages\tcl\tcl.js" />
+    <Content Include="Monaco\basic-languages\typescript\typescript.js" />
+    <Content Include="Monaco\basic-languages\vb\vb.js" />
+    <Content Include="Monaco\basic-languages\xml\xml.js" />
+    <Content Include="Monaco\basic-languages\yaml\yaml.js" />
+    <Content Include="Monaco\diffviewer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.de.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.es.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.fr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.it.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.ja.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.ko.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.ru.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.zh-cn.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\editor\editor.main.nls.zh-tw.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\css\cssMode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\css\cssWorker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\html\htmlMode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\html\htmlWorker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\json\jsonMode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\json\jsonWorker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\typescript\tsMode.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\language\typescript\tsWorker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Monaco\loader.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Wpf" Version="75.1.142" />
+    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.6.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0605" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataServiceClient\DataServiceClient.csproj" />
+    <ProjectReference Include="..\DataServiceInterface\DataServiceInterface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\DiffViewer.xaml.cs">
+      <DependentUpon>DiffViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\Editor.xaml.cs">
+      <DependentUpon>Editor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ScriptViewWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\DiffViewer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Editor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ScriptViewWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\ResultsHtmlView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Update="CefSharp">
+      <Private>true</Private>
+    </Reference>
+    <Reference Update="CefSharp.Core">
+      <Private>true</Private>
+    </Reference>
+    <Reference Update="CefSharp.Wpf">
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(OutDir)FusionScript* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\FusionScript\&#xD;&#xA;" />
+  </Target>
+
+</Project>

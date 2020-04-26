@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="RxdSolutions.FusionScript.Views.ScriptViewCompare"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ctls="clr-namespace:RxdSolutions.FusionScript.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+
+    <DockPanel LastChildFill="True">
+
+        <Grid DockPanel.Dock="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.49*" />
+                <ColumnDefinition Width="0.51*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+
+                <CollectionViewSource x:Key="AuditCollection"
+                                      Source="{Binding Audit}" />
+
+            </Grid.Resources>
+
+            <ComboBox Grid.Column="0"
+                      SelectedItem="{Binding SelectedAudit1}"
+                      Margin="2,0,2,0">
+                <ComboBox.ItemsSource>
+                    <CompositeCollection>
+                        <CollectionContainer Collection="{Binding Source={StaticResource AuditCollection}}" />
+                        <ComboBoxItem Content="(Current)"></ComboBoxItem>
+                    </CompositeCollection>
+                </ComboBox.ItemsSource>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50px" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150px" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Path=Version}"
+                                       Grid.Column="0" />
+
+                            <TextBlock Text="{Binding Path=DateModified}"
+                                       Grid.Column="1" />
+
+                            <TextBlock Text="{Binding UserName}"
+                                       Grid.Column="2" />
+
+                            <TextBlock Text="{Binding Path=Name}"
+                                       Grid.Column="3" />
+
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <ComboBox Grid.Column="1"
+                      SelectedItem="{Binding SelectedAudit2}"
+                      Margin="2,0,2,0">
+                <ComboBox.ItemsSource>
+                    <CompositeCollection>
+                        <CollectionContainer Collection="{Binding Source={StaticResource AuditCollection}}" />
+                        <ComboBoxItem Content="(Current)"></ComboBoxItem>
+                    </CompositeCollection>
+                </ComboBox.ItemsSource>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50px" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150px" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{Binding Path=Version}"
+                                       Grid.Column="0" />
+
+                            <TextBlock Text="{Binding Path=DateModified}"
+                                       Grid.Column="1" />
+
+                            <TextBlock Text="{Binding UserName}"
+                                       Grid.Column="2" />
+
+                            <TextBlock Text="{Binding Path=Name}"
+                                       Grid.Column="3" />
+
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+        </Grid>
+
+        <Grid Margin="2">
+
+            <ctls:DiffViewer x:Name="DiffViewer"
+                             OriginalText="{Binding SelectedAudit1Script}"
+                             ModifiedText="{Binding SelectedAudit2Script}" />
+
+            <ProgressBar IsIndeterminate="{Binding IsLoading, ElementName=DiffViewer}"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Top"
+                         Width="Auto"
+                         Height="5"
+                         Visibility="{Binding IsLoading, ElementName=DiffViewer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         BorderThickness="0" />
+
+        </Grid>
+
+    </DockPanel>
+
+</UserControl>

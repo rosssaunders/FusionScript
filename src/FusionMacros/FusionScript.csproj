@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B2C40FF2-FADE-49E7-95BF-227EEF950D5E}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>RxdSolutions.FusionScript</RootNamespace>
+    <AssemblyName>FusionScript</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <LangVersion>default</LangVersion>
+    <Platforms>x64</Platforms>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Cromium\**" />
+    <EmbeddedResource Remove="Cromium\**" />
+    <None Remove="Cromium\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Reporting\FusionScriptReportingSourceGUI.xaml" />
+    <None Remove="ScriptsView.xaml" />
+    <None Remove="ScriptView.xaml" />
+    <None Remove="Views\Assets.xaml" />
+    <None Remove="Views\ScriptsView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Oracle.DataAccess">
+      <HintPath>..\..\libs\Oracle.DataAccess.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Core.Data">
+      <HintPath>..\..\libs\Sophis.Core.Data.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Event.Core">
+      <HintPath>..\..\libs\Sophis.Event.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Event.Risque">
+      <HintPath>..\..\libs\Sophis.Event.Risque.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Event.Value">
+      <HintPath>..\..\libs\Sophis.Event.Value.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Reporting.GUI">
+      <HintPath>..\..\libs\Sophis.Reporting.GUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Sophis.Windows">
+      <HintPath>..\..\libs\Sophis.Windows.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Windows.Ribbon">
+      <HintPath>..\..\libs\Sophis.Windows.Ribbon.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Windows.Widgets">
+      <HintPath>..\..\libs\Sophis.Windows.Widgets.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Windows.Widgets.Core">
+      <HintPath>..\..\libs\Sophis.Windows.Widgets.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisConfiguration">
+      <HintPath>..\..\libs\SophisConfiguration.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisDotNetToolkit">
+      <HintPath>..\..\libs\SophisDotNetToolkit.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisDotNetToolkitGUI">
+      <HintPath>..\..\libs\SophisDotNetToolkitGUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisDotNetTools">
+      <HintPath>..\..\libs\SophisDotNetTools.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisDotNetValue">
+      <HintPath>..\..\libs\SophisDotNetValue.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisPortfolioGUI">
+      <HintPath>..\..\libs\SophisPortfolioGUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Sophis.Reporting">
+      <HintPath>..\..\libs\Sophis.Reporting.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SophisPortfoliosGUI">
+      <HintPath>..\..\libs\SophisPortfoliosGUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Reporting\FusionScriptReportingSourceGUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Assets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScriptsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\pythonnet\src\runtime\Python.Runtime.csproj" />
+    <ProjectReference Include="..\DataServiceClient\DataServiceClient.csproj" />
+    <ProjectReference Include="..\DataServiceInterface\DataServiceInterface.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="FusionPy.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(OutDir)FusionScript* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)System.ServiceModel* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)Python.Runtime* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\&#xD;&#xA;" />
+  </Target>
+</Project>
