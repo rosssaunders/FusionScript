@@ -11,7 +11,7 @@ namespace RxdSolutions.FusionScript.Events
 {
     public static class CoherencyEvents
     {
-        public const int FusionMacroChanged = 1179468616; //FMCH
-        public const int FusionMacroDeleted = 1179468876; //FMDL
+        public const int FusionScriptChanged = 1179468616; //FMCH
+        public const int FusionScriptDeleted = 1179468876; //FMDL
     }
 }

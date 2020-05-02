@@ -148,7 +148,7 @@ namespace RxdSolutions.FusionScript
             }
             else
             {
-                var model = _client.GetMacro(options.ScriptId);
+                var model = _client.GetScript(options.ScriptId);
                 viewModel = new ViewModelAdapter(_client).Adapt(model);
             }
 

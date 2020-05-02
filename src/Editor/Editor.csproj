@@ -280,7 +280,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(OutDir)FusionScript* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\FusionScript\&#xD;&#xA;" />
+    <Exec Command="copy $(OutDir)FusionScript* e:\UAT_SOPHIS\CLIENT\FusionScript\&#xD;&#xA;" />
   </Target>
 
 </Project>

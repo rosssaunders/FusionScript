@@ -31,9 +31,9 @@ namespace RxdSolutions.FusionScript
                 CreateCommand(script);
             }
 
-            _cache.ScriptChanged += Cache_MacroChanged;
-            _cache.ScriptCreated += Cache_MacroChanged;
-            _cache.ScriptDeleted += Cache_MacroDeleted;
+            _cache.ScriptChanged += Cache_ScriptChanged;
+            _cache.ScriptCreated += Cache_ScriptChanged;
+            _cache.ScriptDeleted += Cache_ScriptDeleted;
         }
 
         private void CreateCommand(ScriptModel script)
@@ -46,7 +46,7 @@ namespace RxdSolutions.FusionScript
             _commands.Add(script.Id, scriptCommand);
         }
 
-        private void Cache_MacroChanged(object sender, ScriptUpdatedEventArgs e)
+        private void Cache_ScriptChanged(object sender, ScriptUpdatedEventArgs e)
         {
             if(!_commands.ContainsKey(e.Id))
             {
@@ -54,7 +54,7 @@ namespace RxdSolutions.FusionScript
             }
         }
 
-        private void Cache_MacroDeleted(object sender, ScriptUpdatedEventArgs e)
+        private void Cache_ScriptDeleted(object sender, ScriptUpdatedEventArgs e)
         {
             if (_commands.ContainsKey(e.Id))
             {

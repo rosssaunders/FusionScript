@@ -139,7 +139,7 @@ namespace RxdSolutions.FusionScript.ViewModels
         [Display(Name = "Name")]
         [Required]
         [StringLength(255)]
-        [UniqueMacroName(ErrorMessage = "The name must be unique in the system.")]
+        [UniqueScriptName(ErrorMessage = "The name must be unique in the system.")]
         public string Name
         {
             get
@@ -427,7 +427,7 @@ namespace RxdSolutions.FusionScript.ViewModels
             Audit.Clear();
             AuditTrigger.Clear();
 
-            var records = _client.LoadMacroAudit(this.Id);
+            var records = _client.LoadScriptAudit(this.Id);
 
             foreach (var r in records.OrderBy(x => x.Version))
             {
@@ -451,7 +451,7 @@ namespace RxdSolutions.FusionScript.ViewModels
         {
             History.Clear();
 
-            var records = _client.LoadMacroExecutions(Id);
+            var records = _client.LoadScriptExecutions(Id);
 
             foreach (var r in records)
             {
@@ -505,7 +505,7 @@ namespace RxdSolutions.FusionScript.ViewModels
 
                 try
                 {
-                    var newModel = _client.SaveMacro(model);
+                    var newModel = _client.SaveScript(model);
 
                     Id = newModel.Id;
                     adapter.Update(newModel, this);

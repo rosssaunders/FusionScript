@@ -34,74 +34,77 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Oracle.DataAccess">
-      <HintPath>..\..\libs\Oracle.DataAccess.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Oracle.DataAccess.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Python.Runtime">
+      <HintPath>..\..\libs\PythonNet\Python.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Sophis.Core.Data">
-      <HintPath>..\..\libs\Sophis.Core.Data.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Core.Data.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Event.Core">
-      <HintPath>..\..\libs\Sophis.Event.Core.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Event.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Event.Risque">
-      <HintPath>..\..\libs\Sophis.Event.Risque.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Event.Risque.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Event.Value">
-      <HintPath>..\..\libs\Sophis.Event.Value.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Event.Value.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Reporting.GUI">
-      <HintPath>..\..\libs\Sophis.Reporting.GUI.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Reporting.GUI.dll</HintPath>
     </Reference>
     <Reference Include="Sophis.Windows">
-      <HintPath>..\..\libs\Sophis.Windows.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Windows.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Windows.Ribbon">
-      <HintPath>..\..\libs\Sophis.Windows.Ribbon.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Windows.Ribbon.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Windows.Widgets">
-      <HintPath>..\..\libs\Sophis.Windows.Widgets.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Windows.Widgets.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Windows.Widgets.Core">
-      <HintPath>..\..\libs\Sophis.Windows.Widgets.Core.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Windows.Widgets.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisConfiguration">
-      <HintPath>..\..\libs\SophisConfiguration.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisConfiguration.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisDotNetToolkit">
-      <HintPath>..\..\libs\SophisDotNetToolkit.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisDotNetToolkit.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisDotNetToolkitGUI">
-      <HintPath>..\..\libs\SophisDotNetToolkitGUI.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisDotNetToolkitGUI.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisDotNetTools">
-      <HintPath>..\..\libs\SophisDotNetTools.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisDotNetTools.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisDotNetValue">
-      <HintPath>..\..\libs\SophisDotNetValue.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisDotNetValue.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisPortfolioGUI">
-      <HintPath>..\..\libs\SophisPortfolioGUI.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisPortfolioGUI.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Sophis.Reporting">
-      <HintPath>..\..\libs\Sophis.Reporting.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\Sophis.Reporting.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="SophisPortfoliosGUI">
-      <HintPath>..\..\libs\SophisPortfoliosGUI.dll</HintPath>
+      <HintPath>..\..\libs\Finastra\SophisPortfoliosGUI.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="System" />
@@ -135,7 +138,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\pythonnet\src\runtime\Python.Runtime.csproj" />
     <ProjectReference Include="..\DataServiceClient\DataServiceClient.csproj" />
     <ProjectReference Include="..\DataServiceInterface\DataServiceInterface.csproj" />
   </ItemGroup>
@@ -158,6 +160,6 @@
     </None>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(OutDir)FusionScript* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)System.ServiceModel* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)Python.Runtime* \\wgsb-rsau02.bhdgsystematic.com\e$\UAT_SOPHIS\CLIENT\&#xD;&#xA;" />
+    <Exec Command="copy $(OutDir)FusionScript* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)System.ServiceModel* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)Python.Runtime* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;" />
   </Target>
 </Project>

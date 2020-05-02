@@ -65,12 +65,12 @@ namespace RxdSolutions.FusionScript.Model
                 for(int i = 0; i < ue.GetSize(); i++)
                 {
                     var tagId = ue.GetTag(i);
-                    if(tagId == CoherencyEvents.FusionMacroChanged)
+                    if(tagId == CoherencyEvents.FusionScriptChanged)
                     {
                         var id = ue.GetLongAt(i);
                         ProcessChangedEvent(id);
                     }
-                    else if(tagId == CoherencyEvents.FusionMacroDeleted)
+                    else if(tagId == CoherencyEvents.FusionScriptDeleted)
                     {
                         var id = ue.GetLongAt(i);
                         ProcessDeleteEvent(id);
@@ -83,22 +83,22 @@ namespace RxdSolutions.FusionScript.Model
         {
             if (id != 0)
             {
-                var macro = db.LoadScript(id);
+                var script = db.LoadScript(id);
 
-                if (macro is null) //We don't have access to this macro
+                if (script is null) //We don't have access to this script
                     return;
 
                 if (_cache.ContainsKey(id))
                 {
-                    _cache[id] = macro;
+                    _cache[id] = script;
 
-                    ScriptChanged?.Invoke(this, new ScriptUpdatedEventArgs(id, macro));
+                    ScriptChanged?.Invoke(this, new ScriptUpdatedEventArgs(id, script));
                 }
                 else
                 {
-                    _cache.Add(id, macro);
+                    _cache.Add(id, script);
 
-                    ScriptCreated?.Invoke(this, new ScriptUpdatedEventArgs(id, macro));
+                    ScriptCreated?.Invoke(this, new ScriptUpdatedEventArgs(id, script));
                 }
             }
         }

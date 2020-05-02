@@ -1,7 +1,7 @@
 import clr
 clr.AddReference("System.Windows.Forms")
 
-import FusionMacro as fm
+import FusionScript as fm
 import System.Windows.Forms as forms
 
 selectedFolios = fm.Application.SelectedPortfolios

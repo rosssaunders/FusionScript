@@ -66,6 +66,8 @@ namespace RxdSolutions.FusionScript
                 _scheduler.Start();
 
                 RegisterServerAndClient();
+
+                PythonNet3ExecutionEngine.Initialize();
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace RxdSolutions.FusionScript
         {
             try
             {
-                _editorManager.Exit();
+                _editorManager?.Exit();
 
                 _scheduler.Stop();
 
@@ -153,7 +155,7 @@ namespace RxdSolutions.FusionScript
         private static string SetPythonLocation(string path)
         {
             string pythonLocation = "";
-            CSMConfigurationFile.getEntryValue("FusionMacro", "PythonLocation", ref pythonLocation, "");
+            CSMConfigurationFile.getEntryValue("FusionScript", "PythonLocation", ref pythonLocation, "");
 
             var location = Environment.ExpandEnvironmentVariables(pythonLocation);
             location = location.Replace("%APPBASE%", AppDomain.CurrentDomain.SetupInformation.ApplicationBase);

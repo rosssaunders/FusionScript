@@ -11,7 +11,7 @@ namespace RxdSolutions.FusionScript
     /// </summary>
     public class NamedPipeManager
     {
-        public string NamedPipeName = "FusionMacroEditor";
+        public string NamedPipeName = "FusionScriptEditor";
         public event Action<string> ReceiveString;
 
         public const string EXIT_STRING = "__EXIT__";

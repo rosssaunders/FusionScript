@@ -7,13 +7,13 @@ namespace RxdSolutions.FusionScript.Interface
     public interface IDataServiceClient
     {
         [OperationContract(IsOneWay = true)]
-        void MacroCreated(int macroId, ScriptModel model);
+        void ScriptCreated(int id, ScriptModel model);
 
         [OperationContract(IsOneWay = true)]
-        void MacroChanged(int macroId, ScriptModel model);
+        void ScriptChanged(int id, ScriptModel model);
 
         [OperationContract(IsOneWay = true)]
-        void MacroDeleted(int macroId, ScriptModel model);
+        void ScriptDeleted(int id, ScriptModel model);
 
         [OperationContract]
         [FaultContract(typeof(ErrorFaultContract))]

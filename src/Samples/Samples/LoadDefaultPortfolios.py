@@ -1,5 +1,5 @@
-from FusionMacro import *
-portfoliosToLoad = [29937,29938,30499] #Equity Long/Short, Global Macro, Hedge book
+from FusionScript import *
+portfoliosToLoad = [29937,29938,30499]
 
 for folioId in portfoliosToLoad:
 

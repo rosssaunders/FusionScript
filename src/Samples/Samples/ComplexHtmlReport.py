@@ -7,7 +7,7 @@ import win32com.client as win32
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt 
-from FusionMacro import *
+from FusionScript import *
 from collections import defaultdict
 from collections import namedtuple
 

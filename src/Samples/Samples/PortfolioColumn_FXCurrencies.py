@@ -1,6 +1,6 @@
 import clr
-import FusionMacro as fm
-import FusionMacro.Column as col
+import FusionScript as fm
+import FusionScript.Column as col
 from datetime import datetime
 
 def PositionCellHandlerCcy1(position):

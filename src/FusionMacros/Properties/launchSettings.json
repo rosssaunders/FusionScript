@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "FusionMacros": {
+    "FusionScript": {
       "commandName": "Executable",
-      "executablePath": "C:\\UAT_SOPHIS\\CLIENT\\SophisValue.exe",
-      "workingDirectory": "C:\\UAT_SOPHIS\\CLIENT"
+      "executablePath": "E:\\UAT_SOPHIS\\CLIENT\\SophisValue.exe",
+      "workingDirectory": "E:\\UAT_SOPHIS\\CLIENT"
     }
   }
 }

@@ -22,19 +22,19 @@ namespace RxdSolutions.FusionScript.Client
             //Do nothing. Just here to keep the Duplex channel alive.
         }
 
-        public void MacroChanged(int macroId, ScriptModel model)
+        public void ScriptChanged(int id, ScriptModel model)
         {
-            _changed.Invoke(macroId, model);
+            _changed.Invoke(id, model);
         }
 
-        public void MacroCreated(int macroId, ScriptModel model)
+        public void ScriptCreated(int id, ScriptModel model)
         {
-            _created.Invoke(macroId, model);
+            _created.Invoke(id, model);
         }
 
-        public void MacroDeleted(int macroId, ScriptModel model)
+        public void ScriptDeleted(int id, ScriptModel model)
         {
-            _deleted.Invoke(macroId, model);
+            _deleted.Invoke(id, model);
         }
     }
 }

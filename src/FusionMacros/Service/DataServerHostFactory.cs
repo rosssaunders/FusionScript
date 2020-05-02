@@ -17,7 +17,11 @@ namespace RxdSolutions.FusionScript.Service
             var processId = System.Diagnostics.Process.GetCurrentProcess().Id;
             var sessionId = System.Diagnostics.Process.GetCurrentProcess().SessionId;
 
-            return new Uri($"net.tcp://localhost:58769/FusionMacro/{sessionId}/{processId}");
+#if DEBUG
+            return new Uri($"net.tcp://localhost:58769/FusionScript");
+#else
+            return new Uri($"net.tcp://localhost:58769/FusionScript/{sessionId}/{processId}");
+#endif
         }
 
         public static ServiceHost Create(DataService server)

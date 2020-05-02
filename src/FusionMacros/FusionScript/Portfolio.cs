@@ -12,7 +12,7 @@ namespace FusionScript
     ///Portfolio
     ///</summary>
     ///<example>
-    ///import FusionMacro as fm
+    ///import FusionScript as fm
     ///p = fm.Portfolio(14812)
     ///print(p.Name)
     ///def PrintChildren(portfolio):

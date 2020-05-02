@@ -2,7 +2,7 @@ import clr
 import sophis.scenario as scn
 import sophis.market_data as md
 import sophis.instrument as inst
-import FusionMacro as fm
+import FusionScript as fm
 
 spx = inst.CSMInstrument.GetInstance(67606769)
 

@@ -11,9 +11,6 @@ using RxdSolutions.FusionScript.ViewModels;
 
 namespace RxdSolutions.FusionScript.Views
 {
-    /// <summary>
-    /// Interaction logic for MacroViewWindow.xaml
-    /// </summary>
     public partial class ScriptViewWindow : MetroWindow
     {
         public ScriptViewWindow(ScriptViewModel viewModel)

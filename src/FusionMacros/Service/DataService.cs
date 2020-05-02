@@ -39,9 +39,9 @@ namespace RxdSolutions.FusionScript.Service
             _cache = cache;
             _engine = engine;
 
-            _cache.ScriptChanged += CacheMacroChanged;
-            _cache.ScriptCreated += CacheMacroCreated;
-            _cache.ScriptDeleted += CacheMacroDeleted;
+            _cache.ScriptChanged += CacheScriptChanged;
+            _cache.ScriptCreated += CacheScriptCreated;
+            _cache.ScriptDeleted += CacheScriptDeleted;
 
             _clientMonitorResetEvent = new AutoResetEvent(false);
             _clientCheckInterval = (int)TimeSpan.FromSeconds(1).TotalMilliseconds;
@@ -254,19 +254,19 @@ namespace RxdSolutions.FusionScript.Service
         {
             try
             {
-                void DeleteMacro()
+                void DeleteInternal()
                 {
                     var fusionDb = new FusionDb();
                     fusionDb.DeleteScript(id);
 
                     var x = new CSMUserEvent();
-                    x.Add(CoherencyEvents.FusionMacroDeleted, id);
+                    x.Add(CoherencyEvents.FusionScriptDeleted, id);
                     CSMGlobalFunctions.GetCurrentGlobalFunctions().SendEvent(x);
                 }
 
                 _context.Invoke(() =>
                 {
-                    DeleteMacro();
+                    DeleteInternal();
                 });
             }
             catch (Exception ex)
@@ -279,13 +279,13 @@ namespace RxdSolutions.FusionScript.Service
         {
             try
             {
-                ScriptModel SaveMacroInternal()
+                ScriptModel SaveInternal()
                 {
                     var fusionDb = new FusionDb();
                     fusionDb.SaveScript(model);
 
                     var x = new CSMUserEvent();
-                    x.Add(CoherencyEvents.FusionMacroChanged, model.Id);
+                    x.Add(CoherencyEvents.FusionScriptChanged, model.Id);
                     CSMGlobalFunctions.GetCurrentGlobalFunctions().SendEvent(x);
 
                     return model;
@@ -293,7 +293,7 @@ namespace RxdSolutions.FusionScript.Service
 
                 return _context.Invoke(() =>
                 {
-                    return SaveMacroInternal();
+                    return SaveInternal();
                 });
             }
             catch (Exception ex)
@@ -307,7 +307,7 @@ namespace RxdSolutions.FusionScript.Service
             try
             {
 
-                IEnumerable<ScriptExecutionModel> LoadMacroExecutions()
+                IEnumerable<ScriptExecutionModel> LoadExecutions()
                 {
                     var fusionDb = new FusionDb();
                     return fusionDb.LoadScriptExecutions(id);
@@ -315,7 +315,7 @@ namespace RxdSolutions.FusionScript.Service
 
                 return _context.Invoke(() =>
                 {
-                    return LoadMacroExecutions();
+                    return LoadExecutions();
                 });
             }
             catch (Exception ex)
@@ -328,7 +328,7 @@ namespace RxdSolutions.FusionScript.Service
         {
             try
             {
-                IEnumerable<ScriptAuditModel> LoadMacroAuditInternal()
+                IEnumerable<ScriptAuditModel> LoadAuditInternal()
                 {
                     var fusionDb = new FusionDb();
                     return fusionDb.LoadScriptAudit(id);
@@ -336,7 +336,7 @@ namespace RxdSolutions.FusionScript.Service
 
                 return _context.Invoke(() =>
                 {
-                    return LoadMacroAuditInternal();
+                    return LoadAuditInternal();
                 });
             }
             catch (Exception ex)
@@ -417,19 +417,19 @@ namespace RxdSolutions.FusionScript.Service
             }
         }
 
-        private void CacheMacroDeleted(object sender, ScriptUpdatedEventArgs e)
+        private void CacheScriptDeleted(object sender, ScriptUpdatedEventArgs e)
         {
-            SendMessageToAllClients((sessionId, client) => client.MacroDeleted(e.Id, e.Model));
+            SendMessageToAllClients((sessionId, client) => client.ScriptDeleted(e.Id, e.Model));
         }
 
-        private void CacheMacroCreated(object sender, ScriptUpdatedEventArgs e)
+        private void CacheScriptCreated(object sender, ScriptUpdatedEventArgs e)
         {
-            SendMessageToAllClients((sessionId, client) => client.MacroCreated(e.Id, e.Model));
+            SendMessageToAllClients((sessionId, client) => client.ScriptCreated(e.Id, e.Model));
         }
 
-        private void CacheMacroChanged(object sender, ScriptUpdatedEventArgs e)
+        private void CacheScriptChanged(object sender, ScriptUpdatedEventArgs e)
         {
-            SendMessageToAllClients((sessionId, client) => client.MacroChanged(e.Id, e.Model));
+            SendMessageToAllClients((sessionId, client) => client.ScriptChanged(e.Id, e.Model));
         }
 
         private void SendMessageToAllClients(Action<string, IDataServiceClient> send)

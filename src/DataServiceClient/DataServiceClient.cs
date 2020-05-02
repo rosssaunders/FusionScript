@@ -15,16 +15,16 @@ namespace RxdSolutions.FusionScript.Client
         private DataServiceClientCallback _callback;
         private DuplexChannelFactory<IDataService> _df;
 
-        private readonly Dictionary<int, ScriptModel> _macros;
+        private readonly Dictionary<int, ScriptModel> _scripts;
 
-        public EventHandler<ScriptUpdateEventArgs> MacroChanged;
-        public EventHandler<ScriptUpdateEventArgs> MacroCreated;
-        public EventHandler<ScriptUpdateEventArgs> MacroDeleted;
+        public EventHandler<ScriptUpdateEventArgs> ScriptChanged;
+        public EventHandler<ScriptUpdateEventArgs> ScriptCreated;
+        public EventHandler<ScriptUpdateEventArgs> ScriptDeleted;
 
         public DataServiceClient(Uri endPointAddress)
         {
             this.endPointAddress = endPointAddress.ToString();
-            _macros = new Dictionary<int, ScriptModel>();
+            _scripts = new Dictionary<int, ScriptModel>();
         }
 
         public ExecutionResults ExecuteScript(ScriptModel model)
@@ -47,7 +47,7 @@ namespace RxdSolutions.FusionScript.Client
             binding.SendTimeout = new TimeSpan(0, 5, 0);
             binding.ReceiveTimeout = new TimeSpan(0, 5, 0);
 
-            _callback = new DataServiceClientCallback(MacroCreatedHandler, MacroChangedHandler, MacroDeletedHandler);
+            _callback = new DataServiceClientCallback(ScriptCreatedHandler, ScriptChangedHandler, ScriptDeletedHandler);
 
             var ep = new EndpointAddress(endPointAddress);
 
@@ -57,25 +57,25 @@ namespace RxdSolutions.FusionScript.Client
             _server.Register();
         }
 
-        private void MacroCreatedHandler(int id, ScriptModel model)
+        private void ScriptCreatedHandler(int id, ScriptModel model)
         {
-            _macros.Add(id, model);
+            _scripts.Add(id, model);
 
-            MacroCreated?.Invoke(this, new ScriptUpdateEventArgs(id, model));
+            ScriptCreated?.Invoke(this, new ScriptUpdateEventArgs(id, model));
         }
 
-        private void MacroChangedHandler(int id, ScriptModel model)
+        private void ScriptChangedHandler(int id, ScriptModel model)
         {
-            _macros[id] = model;
+            _scripts[id] = model;
 
-            MacroChanged?.Invoke(this, new ScriptUpdateEventArgs(id, model));
+            ScriptChanged?.Invoke(this, new ScriptUpdateEventArgs(id, model));
         }
 
-        private void MacroDeletedHandler(int id, ScriptModel model)
+        private void ScriptDeletedHandler(int id, ScriptModel model)
         {
-            _macros.Remove(id);
+            _scripts.Remove(id);
 
-            MacroDeleted?.Invoke(this, new ScriptUpdateEventArgs(id, model));
+            ScriptDeleted?.Invoke(this, new ScriptUpdateEventArgs(id, model));
         }
 
         public IEnumerable<string> GetImages()
@@ -85,7 +85,7 @@ namespace RxdSolutions.FusionScript.Client
 
         public IEnumerable<ScriptModel> GetAll()
         {
-            return _macros.Values;
+            return _scripts.Values;
         }
 
         public bool CanManageFirm()
@@ -113,7 +113,7 @@ namespace RxdSolutions.FusionScript.Client
             _server.DeleteScript(id);
         }
 
-        public ScriptModel GetMacro(int id)
+        public ScriptModel GetScript(int id)
         {
             return _server.GetScript(id);
         }
@@ -122,21 +122,21 @@ namespace RxdSolutions.FusionScript.Client
         {
             foreach(var model in _server.GetAllScripts())
             {
-                _macros.Add(model.Id, model);
+                _scripts.Add(model.Id, model);
             }
         }
 
-        public ScriptModel SaveMacro(ScriptModel model)
+        public ScriptModel SaveScript(ScriptModel model)
         {
             return _server.SaveScript(model);
         }
 
-        public IEnumerable<ScriptExecutionModel> LoadMacroExecutions(int id)
+        public IEnumerable<ScriptExecutionModel> LoadScriptExecutions(int id)
         {
             return _server.LoadExecutions(id);
         }
 
-        public IEnumerable<ScriptAuditModel> LoadMacroAudit(int id)
+        public IEnumerable<ScriptAuditModel> LoadScriptAudit(int id)
         {
             return _server.LoadAudit(id);
         }

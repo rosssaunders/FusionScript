@@ -1,5 +1,5 @@
 import clr
-import FusionMacro as fm
+import FusionScript as fm
 import random
 from datetime import datetime
 
