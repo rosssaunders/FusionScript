@@ -2,7 +2,7 @@
   "profiles": {
     "Editor": {
       "commandName": "Project",
-      "commandLineArgs": "--server net.tcp://localhost:58769/FusionScript --id 3"
+      "commandLineArgs": "--server net.tcp://localhost:58769/FusionScript --id 2"
     }
   }
 }

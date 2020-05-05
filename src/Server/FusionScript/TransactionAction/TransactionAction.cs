@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,18 +46,6 @@ namespace FusionScript
                     new TransactionWrap(original),
                     new TransactionWrap(transaction),
                     event_id);
-        }
-    }
-
-    public class TransactionAction2 : CSMTransactionAction
-    {
-        public TransactionAction2()
-        {
-        }
-
-        public override void VoteForModification(CSMTransaction original, CSMTransaction transaction, int event_id)
-        {
-            Debug.Print("HERE");
         }
     }
 }

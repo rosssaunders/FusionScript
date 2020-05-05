@@ -25,6 +25,7 @@ namespace RxdSolutions.FusionScript
             psi.FileName = @"FusionScriptEditor.exe";
             psi.Arguments = $"--server {_editorDataUri}";
             psi.WorkingDirectory = Path.Combine(Environment.CurrentDirectory, Resources.ToolkitName);
+            psi.UseShellExecute = true;
 
             if (id.HasValue)
                 psi.Arguments += $" --id {id.Value}";

@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using FusionScript;
 using RxdSolutions.FusionScript.Client;
 using RxdSolutions.FusionScript.Model;
 using RxdSolutions.FusionScript.Properties;
@@ -15,6 +16,7 @@ using RxdSolutions.FusionScript.Service;
 using RxdSolutions.FusionScript.Triggers;
 using sophis;
 using sophis.misc;
+using sophis.portfolio;
 using sophis.reporting;
 using sophis.reporting.gui;
 using sophis.scenario;
@@ -25,6 +27,8 @@ namespace RxdSolutions.FusionScript
 {
     public class Main : IMain
     {
+        private bool _toolkitLoaded = false;
+
         public static ScriptCache ScriptCache;
         public static ExecutionEngineFactory ExecutionEngineFactory;
         public static ExecutionService ExecutionEngine;
@@ -47,6 +51,8 @@ namespace RxdSolutions.FusionScript
                     return;
                 }
 
+                _toolkitLoaded = true;
+
                 _editorManager = new EditorManager(DataServerHostFactory.GetListeningAddress().ToString());
 
                 InitialiseCache();
@@ -68,6 +74,8 @@ namespace RxdSolutions.FusionScript
                 RegisterServerAndClient();
 
                 PythonNet3ExecutionEngine.Initialize();
+
+                CSMTransactionAction.Register("TransactionAction2", CSMTransactionAction.eMOrder.M_oAfterSophisValidation, new TransactionAction2());
             }
             catch (Exception ex)
             {
@@ -94,15 +102,18 @@ namespace RxdSolutions.FusionScript
         {
             try
             {
-                _editorManager?.Exit();
-
-                _scheduler.Stop();
-
-                if(_host is object)
+                if(_toolkitLoaded)
                 {
-                    var ds = _host.SingletonInstance as DataService;
-                    ds.Stop();
-                    _host.Close();
+                    _editorManager?.Exit();
+
+                    _scheduler?.Stop();
+
+                    if (_host is object)
+                    {
+                        var ds = _host.SingletonInstance as DataService;
+                        ds.Stop();
+                        _host.Close();
+                    }
                 }
             }
             catch (Exception ex)

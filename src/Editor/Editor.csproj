@@ -230,8 +230,8 @@
 
   <ItemGroup>
     <PackageReference Include="CefSharp.Wpf" Version="75.1.142" />
-    <PackageReference Include="CommandLineParser" Version="2.6.0" />
-    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.6.0" />
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.8.1" />
     <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0605" />
   </ItemGroup>
 
@@ -280,7 +280,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(OutDir)FusionScript* e:\UAT_SOPHIS\CLIENT\FusionScript\&#xD;&#xA;" />
+    <Exec Command="copy $(OutDir)*.* e:\UAT_SOPHIS\CLIENT\FusionScript\&#xD;&#xA;" />
   </Target>
 
 </Project>

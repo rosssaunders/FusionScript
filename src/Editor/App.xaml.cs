@@ -9,6 +9,7 @@ using RxdSolutions.FusionScript.Client;
 using RxdSolutions.FusionScript.Model;
 using RxdSolutions.FusionScript.ViewModels;
 using RxdSolutions.FusionScript.Views;
+using System.Diagnostics;
 
 namespace RxdSolutions.FusionScript
 {
@@ -71,11 +72,7 @@ namespace RxdSolutions.FusionScript
             {
                 if(opt.Shutdown)
                 {
-                    //Give each window a chance to close gracefully
-                    foreach(Window window in this.Windows)
-                    {
-                        window.Close();
-                    }
+                    CloseAllWindowsAndShutdown();
                 }
                 else
                 {
@@ -106,6 +103,15 @@ namespace RxdSolutions.FusionScript
             });
         }
 
+        private void CloseAllWindowsAndShutdown()
+        {
+            //Give each window a chance to close gracefully
+            foreach (Window window in this.Windows)
+            {
+                window.Close();
+            }
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Options options = null;
@@ -125,6 +131,15 @@ namespace RxdSolutions.FusionScript
             InitializeGlobals(options);
 
             LoadMainWindow(options);
+
+            var sophisProcess = Process.GetProcessById(options.ProcessId);
+            sophisProcess.Exited += SophisProcess_Exited;
+        }
+
+        private void SophisProcess_Exited(object sender, EventArgs e)
+        {
+            //Sophis has quit or died without informing us. 
+            CloseAllWindowsAndShutdown();
         }
 
         private void InitializeGlobals(Options options)
@@ -150,6 +165,12 @@ namespace RxdSolutions.FusionScript
             {
                 var model = _client.GetScript(options.ScriptId);
                 viewModel = new ViewModelAdapter(_client).Adapt(model);
+                
+                if(options.Clone)
+                {
+                    viewModel.Id = 0;
+                    viewModel.Name += " (Cloned)";
+                }
             }
 
             viewModel.LoadUsers();
@@ -175,6 +196,9 @@ namespace RxdSolutions.FusionScript
             if (!keepAlive)
             {
                 _namedPipeManager.StopServer();
+
+                _client.Dispose();
+
                 Shutdown();
             }
         }

@@ -166,6 +166,13 @@ namespace RxdSolutions.FusionScript.Client
             {
                 if (disposing)
                 {
+                    try
+                    {
+                        _server.Unregister();
+                    }
+                    catch
+                    { }
+                    
                     _df.Close();
                 }
 
