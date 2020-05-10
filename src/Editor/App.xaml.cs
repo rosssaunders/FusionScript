@@ -10,6 +10,7 @@ using RxdSolutions.FusionScript.Model;
 using RxdSolutions.FusionScript.ViewModels;
 using RxdSolutions.FusionScript.Views;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace RxdSolutions.FusionScript
 {
@@ -18,21 +19,20 @@ namespace RxdSolutions.FusionScript
     /// </summary>
     public partial class App : Application
     {
-        public Mutex Mutex;
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
 
         private const string applicationName = "FusionScriptEditor";
+
+        private Mutex _singleApplicationMutex;
 
         private DataServiceClient _client = null;
         private NamedPipeManager _namedPipeManager;
 
-        public App()
+        public void SingleInstanceCheck(int processId)
         {
-            SingleInstanceCheck();
-        }
-
-        public void SingleInstanceCheck()
-        {
-            Mutex = new Mutex(true, applicationName, out bool isOnlyInstance);
+            var uniqueAppName = $"{applicationName}_{processId}";
+            _singleApplicationMutex = new Mutex(true, uniqueAppName, out bool isOnlyInstance);
             if (!isOnlyInstance)
             {
                 string filesToOpen = " ";
@@ -47,21 +47,22 @@ namespace RxdSolutions.FusionScript
                     filesToOpen = sb.ToString();
                 }
 
-                var manager = new NamedPipeManager(applicationName);
+                var manager = new NamedPipeManager(uniqueAppName);
                 manager.Write(filesToOpen);
 
                 Environment.Exit(0);
             }
         }
 
-        public void LoadAppActivator()
+        public void LoadAppActivator(int processId)
         {
-            _namedPipeManager = new NamedPipeManager(applicationName);
+            var uniqueAppName = $"{applicationName}_{processId}";
+            _namedPipeManager = new NamedPipeManager(uniqueAppName);
             _namedPipeManager.StartServer();
             _namedPipeManager.ReceiveString += HandleNamedPipe_OpenRequest;
         }
 
-        public void HandleNamedPipe_OpenRequest(string args)
+        public void HandleNamedPipe_OpenRequest(object sender, string args)
         {
             Options opt = null;
                 Parser.Default.ParseArguments<Options>(args.Split(Environment.NewLine))
@@ -120,20 +121,19 @@ namespace RxdSolutions.FusionScript
                 .WithParsed(opts => options = opts)
                 .WithNotParsed((errs) => throw new ApplicationException(string.Join(",", errs)));
 
+            SingleInstanceCheck(options.ProcessId);
+
+            LoadAppActivator(options.ProcessId);
+
             AppDomain.CurrentDomain.AssemblyResolve += CefSharpInitiailzer.Resolver;
 
             //Any CefSharp references have to be in another method with NonInlining
             //attribute so the assembly rolver has time to do it's thing.
             CefSharpInitiailzer.Initialize();
 
-            LoadAppActivator();
-
             InitializeGlobals(options);
 
             LoadMainWindow(options);
-
-            var sophisProcess = Process.GetProcessById(options.ProcessId);
-            sophisProcess.Exited += SophisProcess_Exited;
         }
 
         private void SophisProcess_Exited(object sender, EventArgs e)
@@ -147,6 +147,15 @@ namespace RxdSolutions.FusionScript
             _client = new DataServiceClient(new Uri(options.Server));
             _client.Open();
             _client.Load();
+
+            _client.OnScriptExecuting += (s, e) =>
+            {
+                var sophisProcess = Process.GetProcessById(options.ProcessId);
+                sophisProcess.Exited += SophisProcess_Exited;
+
+                SetForegroundWindow(sophisProcess.MainWindowHandle);
+
+            };
         }
 
         private void LoadMainWindow(Options options)

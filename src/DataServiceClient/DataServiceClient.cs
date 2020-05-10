@@ -21,6 +21,9 @@ namespace RxdSolutions.FusionScript.Client
         public EventHandler<ScriptUpdateEventArgs> ScriptCreated;
         public EventHandler<ScriptUpdateEventArgs> ScriptDeleted;
 
+        public EventHandler<ScriptModel> OnScriptExecuting;
+        public EventHandler<ExecutionResults> OnScriptExecuted;
+
         public DataServiceClient(Uri endPointAddress)
         {
             this.endPointAddress = endPointAddress.ToString();
@@ -29,12 +32,18 @@ namespace RxdSolutions.FusionScript.Client
 
         public ExecutionResults ExecuteScript(ScriptModel model)
         {
-            return _server.ExecuteScript(model);
+            OnScriptExecuting?.Invoke(this, model);
+
+            var results = _server.ExecuteScript(model);
+
+            OnScriptExecuted?.Invoke(this, results);
+
+            return results;
         }
 
         public Task<ExecutionResults> ExecuteScriptAsync(ScriptModel model)
         {
-            return Task.Run(() => _server.ExecuteScript(model));
+            return Task.Run(() => ExecuteScript(model));
         }
 
         public void Open()

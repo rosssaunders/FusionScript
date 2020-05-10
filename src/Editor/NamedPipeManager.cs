@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Threading;
@@ -11,17 +12,19 @@ namespace RxdSolutions.FusionScript
     /// </summary>
     public class NamedPipeManager
     {
-        public string NamedPipeName = "FusionScriptEditor";
-        public event Action<string> ReceiveString;
+        private readonly string namedPipeName;
+
+        public event EventHandler<string> ReceiveString;
 
         public const string EXIT_STRING = "__EXIT__";
         public const string SHUTDOWN_STRING = "__SHUTDOWN__";
+        
         private bool _isRunning = false;
         private Thread Thread;
 
         public NamedPipeManager(string name)
         {
-            NamedPipeName = name;
+            namedPipeName = name;
         }
 
         /// <summary>
@@ -33,6 +36,8 @@ namespace RxdSolutions.FusionScript
             {
                 _isRunning = true;
 
+                Debugger.Break();
+
                 while (true)
                 {
                     string text;
@@ -40,10 +45,9 @@ namespace RxdSolutions.FusionScript
                     {
                         server.WaitForConnection();
 
-                        using (var reader = new StreamReader(server))
-                        {
-                            text = reader.ReadToEnd();
-                        }
+                        using var reader = new StreamReader(server);
+
+                        text = reader.ReadToEnd();
                     }
 
                     if (text == EXIT_STRING)
@@ -55,15 +59,18 @@ namespace RxdSolutions.FusionScript
                         return;
                 }
             });
-            Thread.Start(NamedPipeName);
+
+            Thread.Start(namedPipeName);
         }
 
         /// <summary>
         /// Called when data is received.
         /// </summary>
         /// <param name="text"></param>
-        protected virtual void OnReceiveString(string text) => ReceiveString?.Invoke(text);
-
+        protected virtual void OnReceiveString(string text)
+        {
+            ReceiveString?.Invoke(this, text);
+        }
 
         /// <summary>
         /// Shuts down the pipe server
@@ -82,25 +89,26 @@ namespace RxdSolutions.FusionScript
         /// <param name="connectTimeout"></param>
         public bool Write(string text, int connectTimeout = 300)
         {
-            using (var client = new NamedPipeClientStream(NamedPipeName))
+            using (var client = new NamedPipeClientStream(namedPipeName))
             {
                 try
                 {
                     client.Connect(connectTimeout);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Debug.Print(ex.ToString());
+
                     return false;
                 }
 
                 if (!client.IsConnected)
                     return false;
 
-                using (var writer = new StreamWriter(client))
-                {
-                    writer.Write(text);
-                    writer.Flush();
-                }
+                using var writer = new StreamWriter(client);
+
+                writer.Write(text);
+                writer.Flush();
             }
             return true;
         }

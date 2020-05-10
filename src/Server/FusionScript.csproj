@@ -33,9 +33,16 @@
     <None Remove="Views\ScriptsView.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="SqlKata" Version="1.1.7" />
+    <PackageReference Include="SqlKata.Execution" Version="1.1.7" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Oracle.DataAccess">
       <HintPath>..\..\libs\Finastra\Oracle.DataAccess.dll</HintPath>
       <Private>false</Private>
+    </Reference>
+    <Reference Include="Oracle.DataAccess.EntityFramework">
+      <HintPath>..\..\libs\Oracle\Oracle.DataAccess.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Python.Runtime">
       <HintPath>..\..\libs\PythonNet\Python.Runtime.dll</HintPath>
@@ -110,6 +117,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
@@ -160,6 +168,6 @@
     </None>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy $(OutDir)FusionScript* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)System.ServiceModel* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)Python.Runtime* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;" />
+    <Exec Command="copy $(OutDir)FusionScript* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)System.ServiceModel* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)Python.Runtime* e:\UAT_SOPHIS\CLIENT\Toolkits\&#xD;&#xA;copy $(OutDir)*EntityFramework* e:\UAT_SOPHIS\CLIENT\&#xD;&#xA;" />
   </Target>
 </Project>

@@ -53,7 +53,8 @@ namespace RxdSolutions.FusionScript
 
                 _toolkitLoaded = true;
 
-                _editorManager = new EditorManager(DataServerHostFactory.GetListeningAddress().ToString());
+                var processId = System.Diagnostics.Process.GetCurrentProcess().Id;
+                _editorManager = new EditorManager(processId, DataServerHostFactory.GetListeningAddress());
 
                 InitialiseCache();
 
@@ -74,8 +75,6 @@ namespace RxdSolutions.FusionScript
                 RegisterServerAndClient();
 
                 PythonNet3ExecutionEngine.Initialize();
-
-                CSMTransactionAction.Register("TransactionAction2", CSMTransactionAction.eMOrder.M_oAfterSophisValidation, new TransactionAction2());
             }
             catch (Exception ex)
             {

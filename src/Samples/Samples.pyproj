@@ -23,9 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="3dVolSurfaceInternet.py" />
-    <Compile Include="Instruments\IRSFields.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="IRSFields.py" />
     <Compile Include="ReportingSuurce.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,9 +35,6 @@
     <Compile Include="ComplexHtmlReport.py" />
     <Compile Include="PortfolioColumn.py" />
     <Compile Include="ApplicationObject.py" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Instruments\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

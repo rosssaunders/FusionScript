@@ -13,6 +13,13 @@ namespace FusionScript
     /// </summary>
     public static class Application
     {
+        static Application()
+        {
+            //Database = new Database(Sophis.DataAccess.DBContext.Connection);
+        }
+
+        //public static Database Database { get; private set; }
+
         public static int PortfolioColumnRefreshVersion
         {
             get
