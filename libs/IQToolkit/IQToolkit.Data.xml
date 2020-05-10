@@ -1,0 +1,1594 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IQToolkit.Data</name>
+    </assembly>
+    <members>
+        <member name="T:IQToolkit.Data.Common.ExecutionBuilder">
+            <summary>
+            Builds an execution plan for a query expression.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ExecutionBuilder.OuterParameterizer">
+            <summary>
+            columns referencing the outer alias are turned into special named-value parameters
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.Aggregator.GetAggregator(System.Type,System.Type)">
+            <summary>
+            Get a function that coerces a sequence of one type into another type.
+            This is primarily used for aggregators stored in ProjectionExpression's, which are used to represent the 
+            final transformation of the entire result set of a query.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.DbExpressionComparer">
+            <summary>
+            Determines if two expressions are equivalent. Supports DbExpression nodes.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.DbExpressionReplacer">
+            <summary>
+            Replaces references to one specific instance of an expression node with another node.
+            Supports DbExpression nodes
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.DbExpressionType">
+            <summary>
+            Extended node types for custom expressions
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.TableExpression">
+            <summary>
+            A custom expression node that represents a table reference in a SQL query
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ColumnExpression">
+            <summary>
+            A custom expression node that represents a reference to a column in a SQL query
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ColumnDeclaration">
+            <summary>
+            A declaration of a column in a SQL SELECT expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.OrderType">
+            <summary>
+            An SQL OrderBy order type 
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.OrderExpression">
+            <summary>
+            A pairing of an expression and an order type for use in a SQL Order By clause
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SelectExpression">
+            <summary>
+            A custom expression node used to represent a SQL SELECT expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.JoinType">
+            <summary>
+            A kind of SQL join
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.JoinExpression">
+            <summary>
+            A custom expression node representing a SQL join clause
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.IsNullExpression">
+            <summary>
+            Allows is-null tests against value-types like int and float
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ProjectionExpression">
+            <summary>
+            A custom expression representing the construction of one or more result objects from a 
+            SQL select expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.DbExpressionVisitor">
+            <summary>
+            An extended expression visitor including custom DbExpression nodes
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.DbExpressionWriter">
+            <summary>
+            Writes out an expression tree (including DbExpression nodes) in a C#-ish syntax
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.FieldReader">
+            <summary>
+            An abstraction for reading field value.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.IQueryExecutorFactory">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Common.QueryExecutor"/> factory.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.IQueryExecutorFactory.CreateExecutor">
+            <summary>
+            Creates a new <see cref="T:IQToolkit.Data.Common.QueryExecutor"/>.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryLanguage">
+            <summary>
+            Defines the language rules for a query provider.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryLanguage.TypeSystem">
+            <summary>
+            The type system used by the language.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.GetGeneratedIdExpression(System.Reflection.MemberInfo)">
+            <summary>
+            Get an expression that selects and entity's generated ID.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.Quote(System.String)">
+            <summary>
+            Converts a name into a quoted name if it would not be representable in the language.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryLanguage.AllowsMultipleCommands">
+            <summary>
+            True if the language allows multiple commands to be executed in one query.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryLanguage.AllowSubqueryInSelectWithoutFrom">
+            <summary>
+            True if it is legal to represent a subquery in a SELECT statement that has no FROM clause.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryLanguage.AllowDistinctInAggregates">
+            <summary>
+            True if DISTINCT is allows in an aggregate expression.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.GetRowsAffectedExpression(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets an expression that evaluates to the number of rows affected by the last command.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.IsRowsAffectedExpressions(System.Linq.Expressions.Expression)">
+            <summary>
+            True if the expression is a rows-affected expression.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.GetOuterJoinTest(IQToolkit.Data.Common.SelectExpression)">
+            <summary>
+            Gets an expression that be used by a query to determines if an outer join had a successful match
+            (as opposed to null columns when no match occurs).
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.AddOuterJoinTest(IQToolkit.Data.Common.ProjectionExpression)">
+            <summary>
+            Adds an outer join test to a projection expression.. 
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryLanguage.JoinColumnGatherer">
+            <summary>
+            Gets all columns used by a join expression
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.IsScalar(System.Type)">
+            <summary>
+            Determines whether the CLR type corresponds to a scalar data type in the query language
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.CanBeColumn(System.Linq.Expressions.Expression)">
+            <summary>
+            Determines whether the given expression can be represented as a column in a select expressionss
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLanguage.MustBeColumn(System.Linq.Expressions.Expression)">
+            <summary>
+            Determines whether the given expression must be represented as a column in a SELECT column list
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryLinguist">
+            <summary>
+            Applies language specific rules to a query.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLinguist.#ctor(IQToolkit.Data.Common.QueryLanguage,IQToolkit.Data.Common.QueryTranslator)">
+            <summary>
+            Construct a <see cref="T:IQToolkit.Data.Common.QueryLinguist"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLinguist.Translate(System.Linq.Expressions.Expression)">
+            <summary>
+            Provides language specific query translation.  Use this to apply language specific rewrites or
+            to make assertions/validations about the query.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLinguist.Format(System.Linq.Expressions.Expression)">
+            <summary>
+            Converts the query expression into text of this query language
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryLinguist.Parameterize(System.Linq.Expressions.Expression)">
+            <summary>
+            Determine which sub-expressions must be parameters
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryType">
+            <summary>
+            A scalar type as understood by the database.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryTypeSystem">
+            <summary>
+            A type system used by a query language
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryTypeSystem.Parse(System.String)">
+            <summary>
+            Parse a type declaration in the database's language.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryTypeSystem.GetColumnType(System.Type)">
+            <summary>
+            Convert a CLR type to a database type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryTypeSystem.Format(IQToolkit.Data.Common.QueryType,System.Boolean)">
+            <summary>
+            Format the data type as it would appear in the language in a declaration.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SqlFormatter">
+            <summary>
+            Formats a query expression into a common SQL language syntax
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.AdvancedMapper">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Common.QueryMapper"/> that can apply an <see cref="T:IQToolkit.Data.Common.AdvancedMapping"/> to a query.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapper.GetDependencyOrderedTables(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets a set of related <see cref="T:IQToolkit.Data.Common.MappingTable"/>'s in dependency order.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.AdvancedMapping">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Common.QueryMapping"/> that allows 
+            1) mapping a single entity onto rows in multiple tables,
+            2) mapping a single table (or set of tables) into multiple entities (nested).
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.IsNestedEntity(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            True if the member references a nested entity.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetTables(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets the tables associated with a single entity.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetPrimaryTable(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets the primary table of the mapping (for multi-table mappings).
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetExtensionTables(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets all extension tables (not the primary table) of a multi-table mapping.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetEntity(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.Data.Common.MappingEntity"/> associated with the <see cref="T:IQToolkit.Data.Common.MappingTable"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetTableId(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            Gets the mapping id for a specific table.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetTableId(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Gets the table id used for the mapped member.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetTableName(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            Gets the name of a table.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.IsExtensionTable(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            True if the table is an extension table.
+            
+            In single entity to multiple table mapping, one table is the primary source and all others are considered extensions.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetExtensionRelatedTableId(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            Gets the related table's id for an extension table.
+            This is usually the primary table's id.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetExtensionKeyColumnNames(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            Gets the column names in the extension table that correspond to the primary table's primary key.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.AdvancedMapping.GetExtensionRelatedMembers(IQToolkit.Data.Common.MappingTable)">
+            <summary>
+            Gets the members in the entity that correspond to the columns from the extension table.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.BasicMapper">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Common.QueryMapper"/> that can apply a <see cref="T:IQToolkit.Data.Common.BasicMapping"/> to a query expression.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapper.GetColumnType(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            The query language specific type for the column
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.BasicMapping">
+            <summary>
+            A base class for <see cref="T:IQToolkit.Data.Common.QueryMapping"/> that support basic table, column and association mappings.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.IsMapped(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Deterimines is a property is mapped onto a column or relationship
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.IsColumn(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Determines if a property is mapped onto a column
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetColumnDbType(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            The type declaration for the column in the provider's syntax
+            </summary>
+            <param name="entity"></param>
+            <param name="member"></param>
+            <returns>a string representing the type declaration or null</returns>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.IsPrimaryKey(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Determines if a property represents or is part of the entities unique identity (often primary key)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetRelatedEntity(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            The type of the entity on the other side of the relationship
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.IsAssociationRelationship(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Determines if the property is an assocation relationship.
+            </summary>
+            <param name="entity"></param>
+            <param name="member"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetAssociationKeyMembers(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Returns the key members on this side of the association
+            </summary>
+            <param name="entity"></param>
+            <param name="member"></param>
+            <returns></returns>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetAssociationRelatedKeyMembers(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Returns the key members on the other side (related side) of the association
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetTableName(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            The name of the corresponding database table
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetColumnName(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            The name of the corresponding table column
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.BasicMapping.GetMappedMembers(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            A sequence of all the mapped members
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.EntityInfo">
+            <summary>
+            A pairing between an entity instance and its mapping.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.EntityInfo.Instance">
+            <summary>
+            The entity instance.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.EntityInfo.Mapping">
+            <summary>
+            The mapping used for the entity.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.EntityInfo.#ctor(System.Object,IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Construct a new <see cref="T:IQToolkit.Data.Common.EntityInfo"/>.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.IHaveMappingEntity">
+            <summary>
+            Defined on types that can describe an <see cref="T:IQToolkit.Data.Common.MappingEntity"/>.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.IHaveMappingEntity.Entity">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.MappingEntity"/>.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.MappingEntity">
+            <summary>
+            Represents info about an entity (a CLR type that is mapped into a row of a table in a database.)
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.MappingEntity.EntityId">
+            <summary>
+            The mapping ID of the entity (typically the name of the entity type.)
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.MappingEntity.StaticType">
+            <summary>
+            The static type of the entity that is referenced by queries, etc. 
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.MappingEntity.RuntimeType">
+            <summary>
+            The type of the entity that is constructed at runtime.
+            This may be different than the static type if the static type is an base class or interface.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryMapper">
+            <summary>
+            Applies mapping rules to queries.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryMapper.Mapping">
+            <summary>
+            The mapping to apply.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryMapper.Translator">
+            <summary>
+            The overall <see cref="T:IQToolkit.Data.Common.QueryTranslator"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetQueryExpression(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Get a query expression that selects all entities from a table
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetEntityExpression(System.Linq.Expressions.Expression,IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets an expression that constructs an entity instance relative to a root.
+            The root is most often a TableExpression, but may be any other experssion such as
+            a ConstantExpression.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetMemberExpression(System.Linq.Expressions.Expression,IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Get an expression for a mapped property relative to a root expression. 
+            The root is either a TableExpression or an expression defining an entity instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetInsertExpression(IQToolkit.Data.Common.MappingEntity,System.Linq.Expressions.Expression,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Get an expression that represents the insert operation for the specified instance.
+            </summary>
+            <param name="entity">The mapping for the entity.</param>
+            <param name="instance">The instance to insert.</param>
+            <param name="selector">A lambda expression that computes a return value from the operation.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetUpdateExpression(IQToolkit.Data.Common.MappingEntity,System.Linq.Expressions.Expression,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.Expression)">
+            <summary>
+            Get an expression that represents the update operation for the specified instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetInsertOrUpdateExpression(IQToolkit.Data.Common.MappingEntity,System.Linq.Expressions.Expression,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Get an expression that represents the insert-or-update operation for the specified instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.GetDeleteExpression(IQToolkit.Data.Common.MappingEntity,System.Linq.Expressions.Expression,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Get an expression that represents the delete operation for the specified instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.IncludeMembers(IQToolkit.Data.Common.EntityExpression,System.Func{System.Reflection.MemberInfo,System.Boolean})">
+            <summary>
+            Recreate the type projection with the additional members included
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.HasIncludedMembers(IQToolkit.Data.Common.EntityExpression)">
+            <summary>
+            Return true if the entity expression has included members.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.ApplyMapping(System.Linq.Expressions.Expression)">
+            <summary>
+            Apply mapping to a sub query expression
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapper.Translate(System.Linq.Expressions.Expression)">
+            <summary>
+            Apply mapping translations to this expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryMapping">
+            <summary>
+            Defines mapping information and rules for the query provider.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetEntityId(System.Type)">
+            <summary>
+            Determines the entity Id based on the type of the entity alone.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetEntity(System.Type)">
+            <summary>
+            Get the meta entity directly corresponding to the CLR type
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetEntity(System.Type,System.String)">
+            <summary>
+            Get the meta entity that maps between the CLR type 'entityType' and the database table, yet
+            is represented publicly as 'elementType'.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetEntity(System.Reflection.MemberInfo)">
+            <summary>
+            Get the meta entity represented by the IQueryable context member
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetMappedMembers(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets the members mapped by the <see cref="T:IQToolkit.Data.Common.MappingEntity"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsPrimaryKey(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            True if the member is part of the entity's primary key.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetPrimaryKeyMembers(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets all members that make up the primary key of the entity.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsRelationship(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Determines if a property is mapped as a relationship
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsSingletonRelationship(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            Determines if a relationship property refers to a single entity (as opposed to a collection.)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsComputed(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            True if a property is computed after insert or update.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsGenerated(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            True if a property value is generated on the server during insert.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsReadOnly(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            True if a property should not be updated.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsUpdatable(IQToolkit.Data.Common.MappingEntity,System.Reflection.MemberInfo)">
+            <summary>
+            True if a property can be part of an update operation
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.CanBeEvaluatedLocally(System.Linq.Expressions.Expression)">
+            <summary>
+            Determines whether a given expression can be executed locally. 
+            (It contains no parts that should be translated to the target environment.)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetPrimaryKey(IQToolkit.Data.Common.MappingEntity,System.Object)">
+            <summary>
+            Gets a value representing the primary key of the entity instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetPrimaryKeyQuery(IQToolkit.Data.Common.MappingEntity,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression[])">
+            <summary>
+            Gets a query that selects the primary key of an entity as an array of values.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetDependentEntities(IQToolkit.Data.Common.MappingEntity,System.Object)">
+            <summary>
+            Gets the entity instances that this instance depends on.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.GetDependingEntities(IQToolkit.Data.Common.MappingEntity,System.Object)">
+            <summary>
+            Gets the entity instances that depend on this instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.CloneEntity(IQToolkit.Data.Common.MappingEntity,System.Object)">
+            <summary>
+            Create a shallow copy of an entity instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.IsModified(IQToolkit.Data.Common.MappingEntity,System.Object,System.Object)">
+            <summary>
+            Returns true if the entity instance has been changed relative to the original instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryMapping.CreateMapper(IQToolkit.Data.Common.QueryTranslator)">
+            <summary>
+            Create a <see cref="T:IQToolkit.Data.Common.QueryMapper"/>
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryCommand">
+            <summary>
+            A command to be issued against the database.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryCommand.CommandText">
+            <summary>
+            The text of the command in the database's language.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryCommand.Parameters">
+            <summary>
+            The parameters the command requires when executed.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryExecutor">
+            <summary>
+            An abstraction that represents the execution of database commands.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryExecutor.RowsAffected">
+            <summary>
+            The number of rows affected by the execution of the last command.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryExecutor.Convert(System.Object,System.Type)">
+            <summary>
+            Converts a value to the specified type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryExecutor.Execute``1(IQToolkit.Data.Common.QueryCommand,System.Func{IQToolkit.Data.Common.FieldReader,``0},IQToolkit.Data.Common.MappingEntity,System.Object[])">
+            <summary>
+            Executes the command once and and projects the rows of the resulting rowset into a sequence of values.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryExecutor.ExecuteBatch(IQToolkit.Data.Common.QueryCommand,System.Collections.Generic.IEnumerable{System.Object[]},System.Int32,System.Boolean)">
+            <summary>
+            Executes the command over a series of parameter sets, and returns the total number of rows affected.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryExecutor.ExecuteBatch``1(IQToolkit.Data.Common.QueryCommand,System.Collections.Generic.IEnumerable{System.Object[]},System.Func{IQToolkit.Data.Common.FieldReader,``0},IQToolkit.Data.Common.MappingEntity,System.Int32,System.Boolean)">
+            <summary>
+            Execute the same command over a series of parameter sets, and produces a sequence of values, once per execution.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryExecutor.ExecuteDeferred``1(IQToolkit.Data.Common.QueryCommand,System.Func{IQToolkit.Data.Common.FieldReader,``0},IQToolkit.Data.Common.MappingEntity,System.Object[])">
+            <summary>
+            Produces an <see cref="T:System.Collections.Generic.IEnumerable`1"/> that will execute the command when enumerated.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryExecutor.ExecuteCommand(IQToolkit.Data.Common.QueryCommand,System.Object[])">
+            <summary>
+            Execute a single command with the specified parameter values and return the number of rows affected.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryParameter">
+            <summary>
+            Represents a parameter to a <see cref="T:IQToolkit.Data.Common.QueryCommand"/>.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryParameter.Name">
+            <summary>
+            The name of the parameter.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryParameter.Type">
+            <summary>
+            The type of the parameter in the CLR type system.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryParameter.QueryType">
+            <summary>
+            The type of the parameter in the database's type system.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryPolice">
+            <summary>
+            Enforcer of a <see cref="T:IQToolkit.Data.Common.QueryPolicy"/>.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryPolice.Policy">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.QueryPolicy"/> being enforced.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.QueryPolice.Translator">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.QueryTranslator"/> used to enforce policy.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolice.#ctor(IQToolkit.Data.Common.QueryPolicy,IQToolkit.Data.Common.QueryTranslator)">
+            <summary>
+            Construct a new <see cref="T:IQToolkit.Data.Common.QueryPolice"/> instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolice.ApplyPolicy(System.Linq.Expressions.Expression,System.Reflection.MemberInfo)">
+            <summary>
+            Applies the member specific policy to an projection.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolice.Translate(System.Linq.Expressions.Expression)">
+            <summary>
+            Translates the query expression to include changes that enforce the policy.
+            This is where choices about inclusion of related objects and how heirarchies are materialized affect the definition of the queries.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolice.BuildExecutionPlan(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            Converts a query into an execution plan.
+            The plan is an function that executes the query and builds the resulting objects.
+            </summary>
+            <param name="query">The <see cref="T:System.Linq.Expressions.Expression"/> that encapsulates the query.</param>
+            <param name="provider">An <see cref="T:System.Linq.Expressions.Expression"/> the references the current <see cref="T:IQToolkit.Data.EntityProvider"/>.</param>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryPolicy">
+            <summary>
+            Defines query execution and materialization policies. 
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolicy.#ctor">
+            <summary>
+            Constructs a <see cref="T:IQToolkit.Data.Common.QueryPolicy"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolicy.IsIncluded(System.Reflection.MemberInfo)">
+            <summary>
+            Determines if a relationship property is to be included in the results of the query
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolicy.IsDeferLoaded(System.Reflection.MemberInfo)">
+            <summary>
+            Determines if a relationship property is included, but the query for the related data is 
+            deferred until the property is first accessed.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryPolicy.CreatePolice(IQToolkit.Data.Common.QueryTranslator)">
+            <summary>
+            Creates a <see cref="T:IQToolkit.Data.Common.QueryPolice"/> instance.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.Data.Common.QueryPolicy.Default">
+            <summary>
+            The default <see cref="T:IQToolkit.Data.Common.QueryPolicy"/>.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryTranslator">
+            <summary>
+            Translates query expressions by applying rules supplied by 
+            a <see cref="P:IQToolkit.Data.Common.QueryTranslator.Linguist"/>, <see cref="N:IQToolkit.Data.Mapping"/> and <see cref="P:IQToolkit.Data.Common.QueryTranslator.Police"/>. 
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryTranslator.#ctor(IQToolkit.Data.Common.QueryLanguage,IQToolkit.Data.Common.QueryMapping,IQToolkit.Data.Common.QueryPolicy)">
+            <summary>
+            Constructs a new <see cref="T:IQToolkit.Data.Common.QueryTranslator"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.QueryTranslator.Translate(System.Linq.Expressions.Expression)">
+            <summary>
+            Translates a query expression using rules defined by the <see cref="P:IQToolkit.Data.Common.QueryTranslator.Linguist"/>, <see cref="N:IQToolkit.Data.Mapping"/> and <see cref="P:IQToolkit.Data.Common.QueryTranslator.Police"/>.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.AggregateChecker">
+            <summary>
+            Determines if a SelectExpression contains any aggregate expressions
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.AggregateRewriter">
+            <summary>
+            Rewrite aggregate expressions, moving them into same select expression that has the group-by clause
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ClientJoinedProjectionRewriter">
+            <summary>
+            rewrites nested projections into client-side joins
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ColumnMapper">
+            <summary>
+            Rewrite all column references to one or more aliases to a new single alias
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ProjectedColumns">
+            <summary>
+            Result from calling ColumnProjector.ProjectColumns
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.ProjectedColumns.Projector">
+            <summary>
+            The expression to computed on the client.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Common.ProjectedColumns.Columns">
+            <summary>
+            The columns to be computed on the server.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.Data.Common.ProjectionAffinity.Client">
+            <summary>
+            Prefer expression computation on the client
+            </summary>
+        </member>
+        <member name="F:IQToolkit.Data.Common.ProjectionAffinity.Server">
+            <summary>
+            Prefer expression computation on the server
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ColumnProjector">
+            <summary>
+            Splits an expression into two parts
+              1) a list of column declarations for sub-expressions that must be evaluated on the server
+              2) a expression that describes how to combine/project the columns back together into the correct result
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ColumnProjector.Nominator">
+            <summary>
+            Nominator is a class that walks an expression tree bottom up, determining the set of 
+            candidate expressions that are possible columns of a select expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.CrossApplyRewriter">
+            <summary>
+            Attempts to rewrite cross-apply and outer-apply joins as inner and left-outer joins
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.CrossJoinIsolator">
+            <summary>
+            Isolates cross joins from other types of joins using nested sub queries
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.CrossJoinRewriter">
+            <summary>
+            Attempt to rewrite cross joins as inner joins
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.DeclaredAliasGatherer">
+            <summary>
+             returns the set of all aliases produced by a query source
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.OrderByRewriter">
+            <summary>
+            Moves order-bys to the outermost select if possible
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Common.OrderByRewriter.PrependOrderings(System.Collections.Generic.IList{IQToolkit.Data.Common.OrderExpression})">
+            <summary>
+            Add a sequence of order expressions to an accumulated list, prepending so as
+            to give precedence to the new expressions over any previous expressions
+            </summary>
+            <param name="newOrderings"></param>
+        </member>
+        <member name="M:IQToolkit.Data.Common.OrderByRewriter.RebindOrderings(System.Collections.Generic.IEnumerable{IQToolkit.Data.Common.OrderExpression},IQToolkit.Data.Common.TableAlias,System.Collections.Generic.HashSet{IQToolkit.Data.Common.TableAlias},System.Collections.Generic.IEnumerable{IQToolkit.Data.Common.ColumnDeclaration})">
+            <summary>
+            Rebind order expressions to reference a new alias and add to column declarations if necessary
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.Parameterizer">
+            <summary>
+            Converts user arguments into named-value parameters
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryBinder">
+            <summary>
+            Converts LINQ query operators to into custom DbExpression's
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.QueryDuplicator">
+            <summary>
+            Duplicate the query expression by making a copy with new table aliases
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.RedundantColumnRemover">
+            <summary>
+            Removes duplicate column declarations that refer to the same underlying column
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.RedundantJoinRemover">
+            <summary>
+            Removes joins expressions that are identical to joins that already exist
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.RedundantSubqueryRemover">
+            <summary>
+            Removes select expressions that don't add any additional semantic value
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ReferencedAliasGatherer">
+            <summary>
+             returns the set of all aliases produced by a query source
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.ReferencedColumnGatherer">
+            <summary>
+            Gathers all columns referenced by the given expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.RelationshipBinder">
+            <summary>
+            Translates accesses to relationship members into projections or joins
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.RelationshipIncluder">
+            <summary>
+            Adds relationship to query results depending on policy
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SelectGatherer">
+            <summary>
+            returns the list of SelectExpressions accessible from the source expression
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SingletonProjectionRewriter">
+            <summary>
+            Rewrites nested singleton projection into server-side joins
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SkipToNestedOrderByRewriter">
+            <summary>
+            Rewrites queries with skip and take to use the nested queries with inverted ordering technique
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SkipToRowNumberRewriter">
+            <summary>
+            Rewrites take and skip expressions into uses of TSQL row_number function
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.SubqueryRemover">
+            <summary>
+            Removes one or more SelectExpression's by rewriting the expression tree to not include them, promoting
+            their from clause expressions and rewriting any column expressions that may have referenced them to now
+            reference the underlying data directly.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Common.UnusedColumnRemover">
+            <summary>
+            Removes column declarations in SelectExpression's that are not referenced
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntityPolicy">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Common.QueryPolicy"/> for database entities.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.Apply(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Apply the transform function to any query (or sub query) with the element type of the function's parameter.
+            </summary>
+            <param name="fnApply">A lambda expression with one parameter that is a sequence of elements and
+            returning a sequence of the same element type.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.Apply``1(System.Linq.Expressions.Expression{System.Func{System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0}}})">
+            <summary>
+            Apply the transform function to any query (or sub query) with element type <see cref="T:TEntity"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.Include(System.Reflection.MemberInfo)">
+            <summary>
+            Include the association member's elements in any query that produces the containing entity type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.Include(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            Include the association member's elements in any query that produces the containing entity type.
+            </summary>
+            <param name="member">The member whose elements will be included.</param>
+            <param name="deferLoad">If true, the member's elements will be defer loaded if possible.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.IncludeWith(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Include the association member's elements in the output any query that procudes the containing entity type.
+            Specified as a lambda expression of an element of the containing type referencing the member.
+            </summary>
+            <param name="fnMember">A lambda expression that takes a single parameter of the entity type and a 
+            body that references an association member of the parameter.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.IncludeWith(System.Linq.Expressions.LambdaExpression,System.Boolean)">
+            <summary>
+            Include the association member's elements in the output of any query that procudes the containing entity type.
+            Specified as a lambda expression of an element of the containing type referencing the member.
+            </summary>
+            <param name="fnMember">A lambda expression that takes a single parameter of the entity type and a 
+            body that references an association member of the parameter.</param>
+            <param name="deferLoad">If true the member's elements will be defer loaded if possible.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.IncludeWith``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Include the association member's elements in the output of any query that procudes the containing entity type.
+            Specified as a lambda expression of an element of the containing type referencing the member.
+            </summary>
+            <param name="fnMember">A lambda expression that takes a single parameter of the entity type and a 
+            body that references an association member of the parameter.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.IncludeWith``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean)">
+            <summary>
+            Include the association member's elements in the output of any query that procudes the containing entity type.
+            Specified as a lambda expression of an element of the containing type referencing the member.
+            </summary>
+            <param name="fnMember">A lambda expression that takes a single parameter of the entity type and a 
+            body that references an association member of the parameter.</param>
+            <param name="deferLoad">If true the member's elements will be defer loaded if possible.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.AssociateWith(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Add a constraint or filter to an association member that is always applied whenever the member is
+            referenced in a query, by specifing an operation on that member in a lambda expression.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.AssociateWith``1(System.Linq.Expressions.Expression{System.Func{``0,System.Collections.IEnumerable}})">
+            <summary>
+            Add a constraint or filter to an association member that is always applied whenever the member is
+            referenced in a query, by specifing an operation on that member in a lambda expression.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntityPolicy.RootMemberFinder">
+            <summary>
+            Finds the member that is first accessed from the lambda parameter.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.IsIncluded(System.Reflection.MemberInfo)">
+            <summary>
+            True if the association member <see cref="P:member"/>'s elements are included in the output of the query. 
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.IsDeferLoaded(System.Reflection.MemberInfo)">
+            <summary>
+            True if the association member <see cref="P:member"/>'s are defer loaded.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityPolicy.CreatePolice(IQToolkit.Data.Common.QueryTranslator)">
+            <summary>
+            Create a <see cref="T:IQToolkit.Data.Common.QueryPolice"/> that is used during query translation to
+            enforce the policy.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntityProvider">
+            <summary>
+            A base type for LINQ IQueryable query providers that executes translated queries against a database.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProvider.Mapping">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.QueryMapping"/> used by the provider.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProvider.Language">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.QueryLanguage"/> used by the provider.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProvider.Policy">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.QueryPolicy"/> used by the provider.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProvider.Log">
+            <summary>
+            The <see cref="T:System.IO.TextWriter"/> used for logging messages.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProvider.Cache">
+            <summary>
+            The <see cref="T:IQToolkit.QueryCache"/> used to cache queries.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetTable(IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.IEntityTable"/> for the entity.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetTable``1">
+            <summary>
+            Gets the <see cref="T:IQToolkit.IEntityTable`1"/> for the database table corresponding to the entity type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetTable``1(System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.IEntityTable`1"/> for the entity type.
+            </summary>
+            <param name="entityId">An id used to associate the entity type with its mapping.
+            If not specified the name of the entity type is used.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetTable(System.Type,System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.IEntityTable"/> for entity type.
+            </summary>
+            <param name="entityType">The entity type.</param>
+            <param name="entityId">An id used to associate the entity type with its mapping.
+            If not specified the name of the entity type is used.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.CanBeEvaluatedLocally(System.Linq.Expressions.Expression)">
+            <summary>
+            True if the expression can be evaluated locally.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.CanBeParameter(System.Linq.Expressions.Expression)">
+            <summary>
+            True if the expression can be encoded as a parameter.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.CreateExecutor">
+            <summary>
+            Create a <see cref="T:IQToolkit.Data.Common.QueryExecutor"/> used to execute commands against the server.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetQueryText(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets the text of the individual commands that would be sent to the database to execute the query.
+            Does not include any client-side projection or orchestration logic.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntityProvider.CommandGatherer">
+            <summary>
+            Finds all the <see cref="T:IQToolkit.Data.Common.QueryCommand"/>'s in the expression (query plan).
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetQueryPlan(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets text representing the entire query execution plan, including both server-side commands
+            and client-side project and execution logic. For debugging purposes.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.CreateTranslator">
+            <summary>
+            Create a <see cref="T:IQToolkit.Data.Common.QueryTranslator"/> used to translate a query into
+            an execution plan with with parts both executed on the server and client.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.DoTransacted(System.Action)">
+            <summary>
+            Execute the <see cref="T:System.Action"/> under a database transaction.
+            This API will cause the transaction to be started, and then commited after the action is complete.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.DoConnected(System.Action)">
+            <summary>
+            Execute the <see cref="T:System.Action"/> while the database connection is open.
+            This API will cause the connection to be opened, and then closed after the action is complete.
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.ExecuteCommand(System.String)">
+            <summary>
+            Execute the database command specified in the database's natural language.
+            This API will cause the connection to be opened, and then closed after the action is complete.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.Execute(System.Linq.Expressions.Expression)">
+            <summary>
+            Execute the query expression and return the result.
+            This API will cause the connection to be opened, and then closed after the action is complete.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.GetExecutionPlan(System.Linq.Expressions.Expression)">
+            <summary>
+            Convert the query expression into an execution plan, a single <see cref="T:System.Linq.Expressions.Expression"/>
+            that contains all the <see cref="T:IQToolkit.Data.Common.QueryCommand"/>'s to be issued against the server and the 
+            logic to execute on the client to convert the returned data into the expected element types.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProvider.Find(System.Linq.Expressions.Expression,System.Collections.Generic.IList{System.Linq.Expressions.ParameterExpression},System.Type)">
+            <summary>
+            Find the expression of the specified type, either in the specified expression or parameters.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntityProviderSettings">
+            <summary>
+            entity provider settings found in the application configuration (app.config)
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProviderSettings.Provider">
+            <summary>
+            The <see cref="T:IQToolkit.Data.EntityProvider"/> assembly name.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProviderSettings.Connection">
+            <summary>
+            A string that designates the database connection or file name.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityProviderSettings.Mapping">
+            <summary>
+            A string that designates the mapping to use for the <see cref="T:IQToolkit.Data.EntityProvider"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProviderSettings.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructs a new instance of <see cref="T:IQToolkit.Data.EntityProviderSettings"/>
+            </summary>
+            <param name="provider">The <see cref="T:IQToolkit.Data.EntityProvider"/> assembly name.</param>
+            <param name="connection">A string that designates the database connection or file name.</param>
+            <param name="mapping">A string that designates the mapping to use for the <see cref="T:IQToolkit.Data.EntityProvider"/>.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntityProviderSettings.FromApplicationSettings">
+            <summary>
+            Gets settings from the application configuration (app.config file)
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntitySession">
+            <summary>
+            Implements the <see cref="T:IQToolkit.IEntitySession"/> contract over an <see cref="T:IQToolkit.Data.EntityProvider"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntitySession.#ctor(IQToolkit.Data.EntityProvider)">
+            <summary>
+            Construct a <see cref="T:IQToolkit.Data.EntitySession"/>
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntitySession.Provider">
+            <summary>
+            The underlying <see cref="T:IQToolkit.IEntityProvider"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntitySession.GetTable(System.Type,System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.ISessionTable"/> for the corresponding database table.
+            </summary>
+            <param name="entityType">The type of the entities held by this table.</param>
+            <param name="entityId">The id of the entity in the mapping.
+            If unspecified, the provider will infer the id from the element type.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntitySession.GetTable``1(System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.ISessionTable"/> for the corresponding database table.
+            </summary>
+            <param name="entityId">The id of the entity in the mapping.
+            If unspecified, the provider will infer the id from the element type.</param>
+        </member>
+        <member name="M:IQToolkit.Data.EntitySession.SubmitChanges">
+            <summary>
+            Submit changes made to entity instances back to the database, as a single transaction.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntitySession.TrackedTable`1.GetSubmitAction(`0)">
+            <summary>
+            Gets the current <see cref="T:IQToolkit.SubmitAction"/> for the entity instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.EntityTable`1">
+            <summary>
+            An implementation of <see cref="T:IQToolkit.IEntityTable`1"/> for an <see cref="T:IQToolkit.Data.EntityProvider"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityTable`1.#ctor(IQToolkit.Data.EntityProvider,IQToolkit.Data.Common.MappingEntity)">
+            <summary>
+            Construct an <see cref="T:IQToolkit.Data.EntityTable`1"/>
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityTable`1.Entity">
+            <summary>
+            The <see cref="T:IQToolkit.Data.Common.MappingEntity"/> corresponding to this table.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityTable`1.Provider">
+            <summary>
+            The <see cref="T:IQToolkit.IEntityProvider"/> associated with this table.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.EntityTable`1.EntityId">
+            <summary>
+            The ID of the database table.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityTable`1.GetById(System.Object)">
+            <summary>
+            Gets the entity from the database by its id (primary key value).
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityTable`1.Insert(`0)">
+            <summary>
+            Inserts the entity instance into the database.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityTable`1.Delete(`0)">
+            <summary>
+            Deletes the entity from the database.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityTable`1.Update(`0)">
+            <summary>
+            Updates the entity within the database.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.EntityTable`1.InsertOrUpdate(`0)">
+            <summary>
+            Inserts the entity into the database or update if it already exits.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.MappingAttribute">
+            <summary>
+            An attribute used to define information to help map between CLR types/members and database tables/columns.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.EntityAttribute">
+            <summary>
+            Describes information about an entity class.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.EntityAttribute.Id">
+            <summary>
+            The ID associated with the entity mapping.
+            If not specified, the entity id will be the entity type's simple name.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.EntityAttribute.RuntimeType">
+            <summary>
+            The type that is constructed when the entity is returned as the result of a query.
+            If not specified it is the same as the entity type, the type the attribute is placed on.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.TableBaseAttribute">
+            <summary>
+            A base type for mapping attributes that describe table-like mapping.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.TableBaseAttribute.Name">
+            <summary>
+            The name of the table in the database. 
+            If not specified, the table's name will be the name of the member or type the attribute is placed on.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.TableBaseAttribute.Id">
+            <summary>
+            The ID to use for this table in advanced multi-table mapping.
+            If not specified, the <see cref="P:IQToolkit.Data.Mapping.TableBaseAttribute.Id"/> will be the table's name.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.TableAttribute">
+            <summary>
+            Describes the mapping between at database table and an entity type.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.ExtensionTableAttribute">
+            <summary>
+            Describes the mapping between additional database tables and an entity type.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ExtensionTableAttribute.KeyColumns">
+            <summary>
+            The columns in the extension table that correspond to columns in the primary table.
+            Must be specified.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ExtensionTableAttribute.RelatedTableId">
+            <summary>
+            The id of the primary table used in advanced multi-table mapping.
+            If not specified, the related table ID is the primary table's ID.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ExtensionTableAttribute.RelatedKeyColumns">
+            <summary>
+            The columns in the primary table that correspond to the key columns in the extension table.
+            If not specified, it is assumed the column names from both tables are the same.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.MemberAttribute">
+            <summary>
+            A base class for member mapping information.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.MemberAttribute.Member">
+            <summary>
+            The member for the mapping.
+            If not specified it is inferred to be the member the attribute is placed on.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.NestedEntityAttribute">
+            <summary>
+            Denotes the entity as a 
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.NestedEntityAttribute.RuntimeType">
+            <summary>
+            The type that is constructed when the entity is returned as the result of a query.
+            If not specified it is the same as the entity type, the type of the class or element type of the member the attribute is placed on.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.ColumnAttribute">
+            <summary>
+            Describes the mapping between an entity type member and a database column.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.Name">
+            <summary>
+            The name of the column in the database.
+            If not specified, the name of the <see cref="P:IQToolkit.Data.Mapping.MemberAttribute.Member"/> is used.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.TableId">
+            <summary>
+            The ID of the table the column belongs to in advanced multi-table mapping.
+            If not specified, the table ID will be the primary table's ID.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.DbType">
+            <summary>
+            The type of the column as describe in the database language.
+            If not specified, the column type is inferred from the member's type.
+            This value is used to determine the appropriate database type when sending data 
+            during insert and update commands or to properly encode parameters.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.IsComputed">
+            <summary>
+            True if the column is computed by the database on insert/update.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.IsPrimaryKey">
+            <summary>
+            True if the column is part of the primary key of the table.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.IsGenerated">
+            <summary>
+            True if the value of the column is generated by the database on insert.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.ColumnAttribute.IsReadOnly">
+            <summary>
+            True if the column is read-only. 
+            Changes made on the client will be ignored during update.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.AssociationAttribute">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Mapping.MappingAttribute"/> that describes an association between two entities via related column
+            values in the tables underlying each. This is often the same as a foreign key relationship in the database.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.AssociationAttribute.KeyMembers">
+            <summary>
+            The members of the entity that are used to associate this entity with the other related entities.
+            This property must be specified.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.AssociationAttribute.RelatedEntityId">
+            <summary>
+            The mapping ID of the related entity.
+            If not specified, it is inferred to be the entity id of the related entity type.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.AssociationAttribute.RelatedKeyMembers">
+            <summary>
+            The members in the related entity type that form the association key.
+            If not specified, the related key members are inferred to have the same names as the key members. 
+            </summary>
+        </member>
+        <member name="P:IQToolkit.Data.Mapping.AssociationAttribute.IsForeignKey">
+            <summary>
+            True if the association's <see cref="P:IQToolkit.Data.Mapping.AssociationAttribute.KeyMembers"/> correpsonding columns are foreign keys (constrained to the related table's primary key).
+            This information is important to correctly order inserts, updates and deletes without violating foreign key constraints in the database.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.AttributeMapping">
+            <summary>
+            An <see cref="T:IQToolkit.Data.Common.AdvancedMapping"/> that is defined by <see cref="T:IQToolkit.Data.Mapping.MappingAttribute"/>'s
+            on either the entity types or on the query/table properties of a context class.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.#ctor(System.Type)">
+            <summary>
+            Constructs a new instance of a <see cref="T:IQToolkit.Data.Mapping.AttributeMapping"/> where mapping attributes are
+            discovered on a context class (instead of from the entity types).
+            </summary>
+            <param name="contextType">The type of the context class that encodes the mapping attributes.
+            If not spefied, the mapping attributes are assumed to be defined on the individual entity types.</param>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetEntity(System.Reflection.MemberInfo)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.Data.Common.MappingEntity"/> for the member (property/field) of a context type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetEntity(System.Type,System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.Data.Common.MappingEntity"/> associated with a type and entity-id
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetEntity(System.Type,System.String,IQToolkit.Data.Mapping.AttributeMapping.ParentEntity)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.Data.Common.MappingEntity"/> associated with an entity-id, where the entity-type may different 
+            from the element-type exposed via the entity collection.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetMappingAttributes(System.Type,System.String,IQToolkit.Data.Mapping.AttributeMapping.ParentEntity)">
+            <summary>
+            Gets all the mapping attributes for the entity type, even ones inferred (non-strict mode)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetDeclaredMappingAttributes(System.Type,System.String,IQToolkit.Data.Mapping.AttributeMapping.ParentEntity,System.Collections.Generic.List{IQToolkit.Data.Mapping.MappingAttribute})">
+            <summary>
+            Gets the mapping attributes declared by the user for the entity type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetEntityId(System.Type)">
+            <summary>
+            Gets the mapping entity id associated with an entity type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetContextCollectionMembers(System.Type)">
+            <summary>
+            Get all the members on the context type that are entity collections with compatible element types.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.GetContextCollectionMembers">
+            <summary>
+            Get all the members on the context type that are entity collections.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.AttributeMapping.CreateEntity(System.Type,System.String,IQToolkit.Data.Mapping.AttributeMapping.ParentEntity)">
+            <summary>
+            Create a <see cref="T:IQToolkit.Data.Common.MappingEntity"/>.
+            </summary>
+            <param name="entityType">The entity type this mapping is for.</param>
+            <param name="entityId">The mapping id of the entity type.</param>
+            <param name="parent"></param>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.ImplicitMapping">
+            <summary>
+            A simple query mapping that attempts to infer mapping from naming conventions
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.Mapping.XmlMapping">
+            <summary>
+            A <see cref="T:IQToolkit.Data.Common.QueryMapping"/> stored in XML elements.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.XmlMapping.#ctor(System.Xml.Linq.XElement,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Constructs a new instance of <see cref="T:IQToolkit.Data.Mapping.XmlMapping"/>
+            </summary>
+            <param name="root">The root node of the xml mapping tree that contains the entity elements.</param>
+            <param name="assemblies">A list of zero or more assemblies that will be used to find types mentioned in the mapping.</param>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.XmlMapping.FromXml(System.String,System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            Creates a <see cref="T:IQToolkit.Data.Mapping.XmlMapping"/> from xml text.
+            </summary>
+            <param name="xml">The text of the xml mapping.</param>
+            <param name="assemblies">A list of zero or more assemblies that will be used to find types mentioned in the mapping.</param>
+        </member>
+        <member name="M:IQToolkit.Data.Mapping.XmlMapping.FromXml(System.String,System.Reflection.Assembly[])">
+            <summary>
+            Creates a <see cref="T:IQToolkit.Data.Mapping.XmlMapping"/> from xml text.
+            </summary>
+            <param name="xml">The text of the xml mapping.</param>
+            <param name="assemblies">A list of zero or more assemblies that will be used to find types mentioned in the mapping.</param>
+        </member>
+    </members>
+</doc>

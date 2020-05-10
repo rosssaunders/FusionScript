@@ -1,0 +1,1003 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IQToolkit</name>
+    </assembly>
+    <members>
+        <member name="T:IQToolkit.CompoundKey">
+            <summary>
+            Represents a key with multiple values as a single instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IDeferLoadable">
+            <summary>
+            Common interface for controlling defer-loadable types
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IDeferredList">
+            <summary>
+            An interface denoting a list that can be defer loaded.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IDeferredList`1">
+            <summary>
+            An interface denoting a list that can be defer loaded.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.DeferredList`1">
+            <summary>
+            A <see cref="T:System.Collections.Generic.IList`1"/> that is loaded the first time the contents are examined, 
+            or when the <see cref="M:IQToolkit.DeferredList`1.Load"/> method is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.DeferredList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Construct a new <see cref="T:IQToolkit.DeferredList`1"/>
+            </summary>
+            <param name="source">The sequence of values that will be enumerated when <see cref="M:IQToolkit.DeferredList`1.Load"/> is invoked.</param>
+        </member>
+        <member name="M:IQToolkit.DeferredList`1.Load">
+            <summary>
+            Loads the list if not already loaded.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.DeferredList`1.IsLoaded">
+            <summary>
+            True if the list is already loaded.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.DeferredValue`1">
+            <summary>
+            A defer loaded value.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.DeferredValue`1.#ctor(`0)">
+            <summary>
+            Constructs a <see cref="T:IQToolkit.DeferredValue`1"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.DeferredValue`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Constructs a <see cref="T:IQToolkit.DeferredValue`1"/> from the first item in the sequence
+            when the <see cref="M:IQToolkit.DeferredValue`1.Load"/> method is invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.DeferredValue`1.Load">
+            <summary>
+            Loads the value if it is not already loaded.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.DeferredValue`1.IsLoaded">
+            <summary>
+            True if the value is already loaded.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.DeferredValue`1.IsAssigned">
+            <summary>
+            True if the value was assigned instead of being loaded from a source.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.DeferredValue`1.Value">
+            <summary>
+            The value that is defer loaded.
+            The value will be loaded if not already loaded or assigned when this property is read.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.EnumerateOnce`1">
+            <summary>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> wrapper that only allows 
+            the underlying enumerable to be enumerated once.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ExpressionComparer">
+            <summary>
+            Compare two expressions to determine if they are equivalent.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ExpressionExtensions">
+            <summary>
+            Common helper extension methods for construction expressions.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionExtensions.Binary(System.Linq.Expressions.Expression,System.Linq.Expressions.ExpressionType,System.Linq.Expressions.Expression)">
+            <summary>
+            Constructs a binary operator expression from the two expressions and an operator type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionExtensions.ConvertExpressions(System.Linq.Expressions.Expression@,System.Linq.Expressions.Expression@)">
+            <summary>
+            Converts left and right expressions to the same type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionExtensions.Split(System.Linq.Expressions.Expression,System.Linq.Expressions.ExpressionType[])">
+            <summary>
+            Finds all the expressions at the leaves of a tree of binary operations.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionExtensions.Split(System.Linq.Expressions.Expression,System.Collections.Generic.List{System.Linq.Expressions.Expression},System.Linq.Expressions.ExpressionType[])">
+            <summary>
+            Finds all the expressions at the leaves of a tree of binary operations.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionExtensions.Join(System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression},System.Linq.Expressions.ExpressionType)">
+            <summary>
+            Converts a list of expression into a tree of binary operations.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ExpressionReplacer">
+            <summary>
+            Replaces references to one specific instance of an expression node with another node
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ExpressionVisitor">
+            <summary>
+            The base class of an expression visitor (actually a rewriter)
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ExpressionWriter">
+            <summary>
+            Writes out an expression tree in a C#-ish syntax.
+            Useful for debugging expression trees.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionWriter.Write(System.IO.TextWriter,System.Linq.Expressions.Expression)">
+            <summary>
+            Write an expression to the text writer.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ExpressionWriter.WriteToString(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets the written text of an expression tree in a C#-ish syntax.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Grouping`2">
+            <summary>
+            Simple implementation of the <see cref="T:System.Linq.IGrouping`2"/> interface
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IEntityProvider">
+            <summary>
+            An <see cref="T:System.Linq.IQueryProvider"/> for database entities.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityProvider.GetTable``1(System.String)">
+            <summary>
+            Gets a <see cref="T:IQToolkit.IEntityTable`1"/> for the entity type.
+            </summary>
+            <param name="entityId">An id used to associate the entity type with its mapping.
+            If not specified the name of the entity type is used.</param>
+        </member>
+        <member name="M:IQToolkit.IEntityProvider.GetTable(System.Type,System.String)">
+            <summary>
+            Gets a <see cref="T:IQToolkit.IEntityTable`1"/> for the entity type.
+            </summary>
+            <param name="entityType">The entity type.</param>
+            <param name="entityId">An id used to associate the entity type with its mapping.
+            If not specified the name of the entity type is used.</param>
+        </member>
+        <member name="M:IQToolkit.IEntityProvider.CanBeEvaluatedLocally(System.Linq.Expressions.Expression)">
+            <summary>
+            True if the expression can be evaluated locally (client-side)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityProvider.CanBeParameter(System.Linq.Expressions.Expression)">
+            <summary>
+            True if the expression can be isolated as a parameter.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IEntityTable">
+            <summary>
+            A table of entities.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.IEntityTable.Provider">
+            <summary>
+            The <see cref="T:IQToolkit.IEntityProvider"/> underlying the table.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.IEntityTable.EntityId">
+            <summary>
+            The ID of the table. Used for determining mapping.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable.GetById(System.Object)">
+            <summary>
+            Gets an instance of an entity that corresponds to the specific id.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable.Insert(System.Object)">
+            <summary>
+            Inserts the entity instance into the table.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable.Update(System.Object)">
+            <summary>
+            Update an instance that already exists in the table with the 
+            values found in the specified instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable.Delete(System.Object)">
+            <summary>
+            Delete the entity instance from the table that corresponds to the id of
+            the entity specified.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable.InsertOrUpdate(System.Object)">
+            <summary>
+            Insert the entity into the table if an entity with the same id does not already exists,
+            otherwise update the existing entitiy to have the same values as the specified instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IEntityTable`1">
+            <summary>
+            A table of entities.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable`1.GetById(System.Object)">
+            <summary>
+            Gets an instance of an entity that corresponds to the specific id.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable`1.Insert(`0)">
+            <summary>
+            Inserts the entity instance into the table.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable`1.Update(`0)">
+            <summary>
+            Update an instance that already exists in the table with the 
+            values found in the specified instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable`1.Delete(`0)">
+            <summary>
+            Delete the entity instance from the table that corresponds to the id of
+            the entity specified.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntityTable`1.InsertOrUpdate(`0)">
+            <summary>
+            Insert the entity into the table if an entity with the same id does not already exists,
+            otherwise update the existing entitiy to have the same values as the specified instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IEntitySession">
+            <summary>
+            Sessions track changes to entity instances 
+            and enable submiting changes to multiple entities to the database in one atomic action. 
+            </summary>
+        </member>
+        <member name="P:IQToolkit.IEntitySession.Provider">
+            <summary>
+            The underlying <see cref="T:IQToolkit.IEntityProvider"/> for this session.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.IEntitySession.GetTable``1(System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.ISessionTable`1"/> for the corresponding logical database table.
+            </summary>
+            <param name="entityId">An id used to associate the entity type with its mapping.
+            If not specified the name of the entity type is used.</param>
+        </member>
+        <member name="M:IQToolkit.IEntitySession.GetTable(System.Type,System.String)">
+            <summary>
+            Gets the <see cref="T:IQToolkit.ISessionTable"/> for the corresponding logical database table.
+            </summary>
+            <param name="entityType">The entity type.</param>
+            <param name="entityId">An id used to associate the entity type with its mapping.
+            If not specified the name of the entity type is used.</param>
+        </member>
+        <member name="M:IQToolkit.IEntitySession.SubmitChanges">
+            <summary>
+            Submit all changes to the database as a single transaction.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ISessionTable">
+            <summary>
+            A table associated with an <see cref="T:IQToolkit.IEntitySession"/>
+            </summary>
+        </member>
+        <member name="P:IQToolkit.ISessionTable.Session">
+            <summary>
+            The <see cref="T:IQToolkit.IEntitySession"/> associated with this <see cref="T:IQToolkit.ISessionTable"/>
+            </summary>
+        </member>
+        <member name="P:IQToolkit.ISessionTable.Table">
+            <summary>
+            The underlying provider's <see cref="T:IQToolkit.IEntityTable"/> corresponding to this <see cref="T:IQToolkit.ISessionTable"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ISessionTable.GetById(System.Object)">
+            <summary>
+            Gets an entity instance given its id (primary key value)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ISessionTable.SetSubmitAction(System.Object,IQToolkit.SubmitAction)">
+            <summary>
+            Set the <see cref="T:IQToolkit.SubmitAction"/> for this entity instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ISessionTable.GetSubmitAction(System.Object)">
+            <summary>
+            Gets the current <see cref="T:IQToolkit.SubmitAction"/> for the entity instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ISessionTable`1">
+            <summary>
+            A table associated with an <see cref="T:IQToolkit.IEntitySession"/>
+            </summary>
+        </member>
+        <member name="P:IQToolkit.ISessionTable`1.Table">
+            <summary>
+            The <see cref="T:IQToolkit.IEntityTable`1"/> associated with this <see cref="T:IQToolkit.ISessionTable`1"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ISessionTable`1.GetById(System.Object)">
+            <summary>
+            Gets an entity instance given its id (primary key value)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ISessionTable`1.SetSubmitAction(`0,IQToolkit.SubmitAction)">
+            <summary>
+            Set the <see cref="T:IQToolkit.SubmitAction"/> for this entity instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ISessionTable`1.GetSubmitAction(`0)">
+            <summary>
+            Gets the current <see cref="T:IQToolkit.SubmitAction"/> for the entity instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.SubmitAction">
+            <summary>
+            The action to be undertaken for an individual entity instance when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.SubmitAction.None">
+            <summary>
+            No action is taken.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.SubmitAction.Update">
+            <summary>
+            The entity is updated in the database with the new values of the instance.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.SubmitAction.PossibleUpdate">
+            <summary>
+            The entity is updated if it has changed.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.SubmitAction.Insert">
+            <summary>
+            The new entity is inserted
+            </summary>
+        </member>
+        <member name="F:IQToolkit.SubmitAction.InsertOrUpdate">
+            <summary>
+            The entity is either inserted if new or updated if it already exists.
+            </summary>
+        </member>
+        <member name="F:IQToolkit.SubmitAction.Delete">
+            <summary>
+            The entity is deleted.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.SessionTableExtensions">
+            <summary>
+            Additional API's for all <see cref="T:IQToolkit.ISessionTable"/> instances. 
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.InsertOnSubmit``1(IQToolkit.ISessionTable{``0},``0)">
+            <summary>
+            Insert the entity into the database when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.InsertOnSubmit(IQToolkit.ISessionTable,System.Object)">
+            <summary>
+            Insert the entity into the database or update it if it already exists when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.InsertOrUpdateOnSubmit``1(IQToolkit.ISessionTable{``0},``0)">
+            <summary>
+            Insert the entity into the database or update it if it already exists when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.InsertOrUpdateOnSubmit(IQToolkit.ISessionTable,System.Object)">
+            <summary>
+            Insert the entity instance if new or update with new values when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.UpdateOnSubmit``1(IQToolkit.ISessionTable{``0},``0)">
+            <summary>
+            Update the entity in the database when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.UpdateOnSubmit(IQToolkit.ISessionTable,System.Object)">
+            <summary>
+            Update the entity in the database when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.DeleteOnSubmit``1(IQToolkit.ISessionTable{``0},``0)">
+            <summary>
+            Delete the entity from the database when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.SessionTableExtensions.DeleteOnSubmit(IQToolkit.ISessionTable,System.Object)">
+            <summary>
+            Delete the entity from the database when <see cref="M:IQToolkit.IEntitySession.SubmitChanges"/> is called.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.MostRecentlyUsedCache`1">
+            <summary>
+            Implements a cache over a most recently used list
+            </summary>
+        </member>
+        <member name="T:IQToolkit.PartialEvaluator">
+            <summary>
+            Rewrites an expression tree so that locally isolatable sub-expressions are evaluated 
+            and converted into ConstantExpression nodes.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.PartialEvaluator.Eval(System.Linq.Expressions.Expression)">
+            <summary>
+            Performs evaluation and replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
+        <member name="M:IQToolkit.PartialEvaluator.Eval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean})">
+            <summary>
+            Performs evaluation and replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <param name="fnCanBeEvaluated">A function that decides whether a given expression node can be part of the local function.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
+        <member name="M:IQToolkit.PartialEvaluator.Eval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean},System.Func{System.Linq.Expressions.ConstantExpression,System.Linq.Expressions.Expression})">
+            <summary>
+            Performs evaluation and replacement of independent sub-trees
+            </summary>
+            <param name="expression">The root of the expression tree.</param>
+            <param name="fnCanBeEvaluated">A function that decides whether a given expression node can be part of the local function.</param>
+            <param name="fnPostEval">A function to apply to each newly formed <see cref="T:System.Linq.Expressions.ConstantExpression"/>.</param>
+            <returns>A new tree with sub-trees evaluated and replaced.</returns>
+        </member>
+        <member name="T:IQToolkit.PartialEvaluator.SubtreeEvaluator">
+            <summary>
+            Evaluates and replaces sub-trees when first candidate is reached (top-down)
+            </summary>
+        </member>
+        <member name="T:IQToolkit.PartialEvaluator.Nominator">
+            <summary>
+            Performs bottom-up analysis to determine which nodes can possibly
+            be part of an evaluated sub-tree.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IQueryText">
+            <summary>
+            Optional interface for <see cref="T:System.Linq.IQueryProvider"/> to implement <see cref="P:IQToolkit.Query`1.QueryText"/> property.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Query`1">
+            <summary>
+            A default implementation of IQueryable for use with QueryProvider
+            </summary>
+        </member>
+        <member name="T:IQToolkit.QueryCache">
+            <summary>
+            A cache of compiled queries.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCache.Execute(System.Linq.Expressions.Expression)">
+            <summary>
+            Executes a cached query.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCache.Execute(System.Linq.IQueryable)">
+            <summary>
+            Executes a cached query.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCache.Execute``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Executes a cached query.
+            </summary>
+        </member>
+        <member name="P:IQToolkit.QueryCache.Count">
+            <summary>
+            The number of queries currently cached.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCache.Clear">
+            <summary>
+            Clears the cache.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCache.Contains(System.Linq.Expressions.Expression)">
+            <summary>
+            True if the expression corresponds to a query already cached.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCache.Contains(System.Linq.IQueryable)">
+            <summary>
+            True if the <see cref="T:System.Linq.IQueryable"/> is already cached.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.QueryCompiler">
+            <summary>
+            Creates a reusable, parameterized representation of a query that caches the execution plan
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``1(System.Linq.Expressions.Expression{``0})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``3(System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``4(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3}})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``5(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3,``4}})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.QueryCompiler.Compile``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Convert a query into a delegate that will execute the query when invoked.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.QueryProvider">
+            <summary>
+            A basic abstract LINQ query provider
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ReadOnlyExtensions.ToReadOnly``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Converts the sequence into a <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ReflectionExtensions.GetValue(System.Reflection.MemberInfo,System.Object)">
+            <summary>
+            Gets the value of the field or property of the instance.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ReflectionExtensions.SetValue(System.Reflection.MemberInfo,System.Object,System.Object)">
+            <summary>
+            Sets the value of the field or property of the instance.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.ScopedDictionary`2">
+            <summary>
+            A <see cref="T:IQToolkit.ScopedDictionary`2"/> is a dictionary that contains all the
+            items of another dictionary, plus any additional items added directly to it.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ScopedDictionary`2.#ctor(IQToolkit.ScopedDictionary{`0,`1})">
+            <summary>
+            Construct a new <see cref="T:IQToolkit.ScopedDictionary`2"/> given a previous dictionary.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ScopedDictionary`2.#ctor(IQToolkit.ScopedDictionary{`0,`1},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            Construct a <see cref="T:IQToolkit.ScopedDictionary`2"/> given a previous dictionary and a
+            sequence of key-value pairs.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ScopedDictionary`2.Add(`0,`1)">
+            <summary>
+            Add a new value to the <see cref="T:IQToolkit.ScopedDictionary`2"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ScopedDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            Try to get the value for a given key.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.ScopedDictionary`2.ContainsKey(`0)">
+            <summary>
+            Returns true if the <see cref="T:IQToolkit.ScopedDictionary`2"/> contains the key.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.StrongDelegate">
+            <summary>
+            Make a strongly-typed delegate to a weakly typed method (one that takes single object[] argument)
+            (up to 8 arguments)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.StrongDelegate.CreateDelegate(System.Type,System.Object,System.Reflection.MethodInfo)">
+            <summary>
+            Create a strongly typed delegate over a method with a weak signature
+            </summary>
+            <param name="delegateType">The strongly typed delegate's type</param>
+            <param name="target">The target instance for the delegate. This can be specified as null if the method is static.</param>
+            <param name="method">Any method that takes a single array of objects and returns an object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IQToolkit.StrongDelegate.CreateDelegate(System.Type,System.Func{System.Object[],System.Object})">
+            <summary>
+            Create a strongly typed delegate over a Func delegate with weak signature
+            </summary>
+            <param name="delegateType"></param>
+            <param name="fn"></param>
+            <returns></returns>
+        </member>
+        <member name="T:IQToolkit.TopologicalSorter">
+            <summary>
+            Sorts a sequence of items in a graph.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TopologicalSorter.Sort``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Returns the items in order relative to other items.
+            </summary>
+            <param name="items">The input items.</param>
+            <param name="fnItemsBeforeMe">A function that yields items known to be ordered before this item.</param>
+        </member>
+        <member name="M:IQToolkit.TopologicalSorter.Sort``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Returns the items in order relative to other items.
+            </summary>
+            <param name="items">The input items.</param>
+            <param name="fnItemsBeforeMe">A function that yields items known to be ordered before this item.</param>
+            <param name="comparer">An equality comparer for the items.</param>
+        </member>
+        <member name="T:IQToolkit.TypedSubtreeFinder">
+            <summary>
+            Finds the first sub-expression that is of a specified type
+            </summary>
+        </member>
+        <member name="T:IQToolkit.TypeHelper">
+            <summary>
+            Type related helper methods
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.FindIEnumerable(System.Type)">
+            <summary>
+            Finds the type's implemented <see cref="T:System.Collections.Generic.IEnumerable`1"/> type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.IsSequenceType(System.Type)">
+            <summary>
+            Returns true if the type is a sequence type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetSequenceType(System.Type)">
+            <summary>
+            Gets the constructed <see cref="T:System.Collections.Generic.IEnumerable`1"/> for the given element type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetElementType(System.Type)">
+            <summary>
+            Gets the element type given the sequence type.
+            If the type is not a sequence, returns the type itself.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.IsNullableType(System.Type)">
+            <summary>
+            Returns true if the type is a <see cref="T:System.Nullable`1"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.IsNullAssignable(System.Type)">
+            <summary>
+            Returns true if the type can be assigned the value null.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetNonNullableType(System.Type)">
+            <summary>
+            Gets the underlying type if the specified type is a <see cref="T:System.Nullable`1"/>,
+            otherwise just returns given type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetNullAssignableType(System.Type)">
+            <summary>
+            Gets a null-assignable variation of the type.
+            Returns a <see cref="T:System.Nullable`1"/> type if the given type is a value type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetNullConstant(System.Type)">
+            <summary>
+            Gets the <see cref="T:System.Linq.Expressions.ConstantExpression"/> for null of the specified type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetMemberType(System.Reflection.MemberInfo)">
+            <summary>
+            Gets the type of the <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetDefault(System.Type)">
+            <summary>
+            Gets the default value of the specified type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.IsReadOnly(System.Reflection.MemberInfo)">
+            <summary>
+            Returns true if the member is either a read-only field or get-only property.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.IsInteger(System.Type)">
+            <summary>
+            Return true if the type is a kind of integer.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetTypeCode(System.Type)">
+            <summary>
+            Gets the <see cref="T:System.TypeCode"/> for the specified type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.IsAssignableFrom(System.Type,System.Type)">
+            <summary>
+            True if the type is assignable from the other type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetDataMembers(System.Type,System.String,System.Boolean)">
+            <summary>
+            Gets the data members of the type (non-static properties and fields)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetDataMember(System.Type,System.String,System.Boolean)">
+            <summary>
+            Gets the data member with the specified name (non-static properties and fields).
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.FindMethod(System.Type,System.String,System.Type[],System.Type[])">
+            <summary>
+            Finds the matching method declared on the specified type, or inherited from a base type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.FindConstructor(System.Type,System.Type[])">
+            <summary>
+            Finds the matching constructor declared on the specified type.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetInheritedTypeInfos(System.Type)">
+            <summary>
+            Gets a list of the type and all its base types (recursive)
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetInheritedProperites(System.Type)">
+            <summary>
+            Gets a list of all properties, including inherited properties.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetInheritedFields(System.Type)">
+            <summary>
+            Gets a list of all fields, including inherited fields.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetInheritedMethods(System.Type)">
+            <summary>
+            Gets a list of all methods, including inherited methods.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.TypeHelper.GetUninitializedObject(System.Type)">
+            <summary>
+            Gets an unitialized instance of an object of the specified type.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IUpdatable">
+            <summary>
+            An interface that indicates that a <see cref="T:System.Linq.IQueryable"/> source is also updatable.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.IUpdatable`1">
+            <summary>
+            An interface that indicates that a <see cref="T:System.Linq.IQueryable`1"/> source is also updatable.
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Updatable">
+            <summary>
+            Extension methods that implement the updatable pattern.
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Updatable.Insert``2(IQToolkit.IUpdatable{``0},``0,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Insert an copy of the instance into the updatable collection and produce a result if the insert succeeds.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <typeparam name="S">The type of the result.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to insert.</param>
+            <param name="resultSelector">The function that produces the result.</param>
+            <returns>The value of the result if the insert succeed, otherwise null.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Insert``1(IQToolkit.IUpdatable{``0},``0)">
+            <summary>
+            Insert a copy of the instance into an updatable collection.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to insert.</param>
+            <returns>The value 1 if the insert succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Update(IQToolkit.IUpdatable,System.Object,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Update the object in the updatable collection with the values in this instance only if the update check passes and produce
+            a result based on the updated object if the update succeeds.
+            </summary>
+            <param name="collection">The updatable collection</param>
+            <param name="instance">The instance to update.</param>
+            <param name="updateCheck">A predicate testing the suitability of the object in the collection (often used to make sure assumptions have not changed.)</param>
+            <param name="resultSelector">A function that produces a result based on the object in the collection after the update succeeds.</param>
+            <returns>The value of the result function if the update succeeds, otherwise null.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Update``2(IQToolkit.IUpdatable{``0},``0,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Update the object in the updatable collection with the values in this instance only if the update check passes and produce
+            a result based on the updated object if the update succeeds.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <typeparam name="S">The type of the result.</typeparam>
+            <param name="collection">The updatable collection</param>
+            <param name="instance">The instance to update.</param>
+            <param name="updateCheck">A predicate testing the suitability of the object in the collection (often used to make sure assumptions have not changed.)</param>
+            <param name="resultSelector">A function that produces a result based on the object in the collection after the update succeeds.</param>
+            <returns>The value of the result function if the update succeeds, otherwise null.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Update``1(IQToolkit.IUpdatable{``0},``0,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Update the object in the updatable collection with the values in this instance only if the update check passes.
+            </summary>
+            <typeparam name="T">The type of the instance</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to update.</param>
+            <param name="updateCheck">A predicate testing the suitability of the object in the collection.</param>
+            <returns>The value 1 if the update succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Update``1(IQToolkit.IUpdatable{``0},``0)">
+            <summary>
+            Update the object in the updatable collection with the values in this instance.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to update.</param>
+            <returns>The value 1 if the update succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.InsertOrUpdate(IQToolkit.IUpdatable,System.Object,System.Linq.Expressions.LambdaExpression,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Insert a copy of the instance if it does not exist in the collection or update the object in the collection with the values in this instance. 
+            Produce a result based on the object in the collection after the insert or update succeeds.
+            </summary>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to insert or update.</param>
+            <param name="updateCheck">A predicate testing the suitablilty of the object in the collection if an update is required.</param>
+            <param name="resultSelector">A function producing a result based on the object in the collection after the insert or update succeeds.</param>
+            <returns>The value of the result if the insert or update succeeds, otherwise null.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.InsertOrUpdate``2(IQToolkit.IUpdatable{``0},``0,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Insert a copy of the instance if it does not exist in the collection or update the object in the collection with the values in this instance. 
+            Produce a result based on the object in the collection after the insert or update succeeds.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <typeparam name="S">The type of the result.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to insert or update.</param>
+            <param name="updateCheck">A predicate testing the suitablilty of the object in the collection if an update is required.</param>
+            <param name="resultSelector">A function producing a result based on the object in the collection after the insert or update succeeds.</param>
+            <returns>The value of the result if the insert or update succeeds, otherwise null.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.InsertOrUpdate``1(IQToolkit.IUpdatable{``0},``0,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Insert a copy of the instance if it does not exist in the collection or update the object in the collection with the values in this instance. 
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to insert or update.</param>
+            <param name="updateCheck">A function producing a result based on the object in the collection after the insert or update succeeds.</param>
+            <returns>The value 1 if the insert or update succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.InsertOrUpdate``1(IQToolkit.IUpdatable{``0},``0)">
+            <summary>
+            Insert a copy of the instance if it does not exist in the collection or update the object in the collection with the values in this instance. 
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to insert or update.</param>
+            <returns>The value 1 if the insert or update succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Delete(IQToolkit.IUpdatable,System.Object,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Delete the object in the collection that matches the instance only if the delete check passes.
+            </summary>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to delete.</param>
+            <param name="deleteCheck">A predicate testing the suitability of the corresponding object in the collection.</param>
+            <returns>The value 1 if the delete succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Delete``1(IQToolkit.IUpdatable{``0},``0,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Delete the object in the collection that matches the instance only if the delete check passes.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to delete.</param>
+            <param name="deleteCheck">A predicate testing the suitability of the corresponding object in the collection.</param>
+            <returns>The value 1 if the delete succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Delete``1(IQToolkit.IUpdatable{``0},``0)">
+            <summary>
+            Delete the object in the collection that matches the instance.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instance">The instance to delete.</param>
+            <returns>The value 1 if the Delete succeeds, otherwise 0.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Delete(IQToolkit.IUpdatable,System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            Delete all the objects in the collection that match the predicate.
+            </summary>
+            <param name="collection">The updatable collection.</param>
+            <param name="predicate">The predicate.</param>
+            <returns>The number of objects deleted.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Delete``1(IQToolkit.IUpdatable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Delete all the objects in the collection that match the predicate.
+            </summary>
+            <typeparam name="T">The type of the instance.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="predicate">The predicate.</param>
+            <returns>The number of objects deleted.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Batch(IQToolkit.IUpdatable,System.Collections.IEnumerable,System.Linq.Expressions.LambdaExpression,System.Int32,System.Boolean)">
+            <summary>
+            Apply an Insert, Update, InsertOrUpdate or Delete operation over a set of items and produce a set of results per invocation.
+            </summary>
+            <param name="collection">The updatable collection.</param>
+            <param name="instances">The instances to apply the operation to.</param>
+            <param name="fnOperation">The operation to apply.</param>
+            <param name="batchSize">The maximum size of each batch.</param>
+            <param name="stream">If true then execution is deferred until the resulting sequence is enumerated.</param>
+            <returns>A sequence of results cooresponding to each invocation.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Batch``3(IQToolkit.IUpdatable{``0},System.Collections.Generic.IEnumerable{``1},System.Linq.Expressions.Expression{System.Func{IQToolkit.IUpdatable{``0},``1,``2}},System.Int32,System.Boolean)">
+            <summary>
+            Apply an Insert, Update, InsertOrUpdate or Delete operation over a set of items and produce a set of results per invocation.
+            </summary>
+            <typeparam name="U">The type of the collection.</typeparam>
+            <typeparam name="T">The type of the instances.</typeparam>
+            <typeparam name="S">The type of each result</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instances">The instances to apply the operation to.</param>
+            <param name="fnOperation">The operation to apply.</param>
+            <param name="batchSize">The maximum size of each batch.</param>
+            <param name="stream">If true then execution is deferred until the resulting sequence is enumerated.</param>
+            <returns>A sequence of results cooresponding to each invocation.</returns>
+        </member>
+        <member name="M:IQToolkit.Updatable.Batch``3(IQToolkit.IUpdatable{``0},System.Collections.Generic.IEnumerable{``1},System.Linq.Expressions.Expression{System.Func{IQToolkit.IUpdatable{``0},``1,``2}})">
+            <summary>
+            Apply an Insert, Update, InsertOrUpdate or Delete operation over a set of items and produce a set of result per invocation.
+            </summary>
+            <typeparam name="U">The type of the collection.</typeparam>
+            <typeparam name="T">The type of the items.</typeparam>
+            <typeparam name="S">The type of each result.</typeparam>
+            <param name="collection">The updatable collection.</param>
+            <param name="instances">The instances to apply the operation to.</param>
+            <param name="fnOperation">The operation to apply.</param>
+            <returns>A sequence of results corresponding to each invocation.</returns>
+        </member>
+    </members>
+</doc>

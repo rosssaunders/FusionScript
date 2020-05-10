@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IQToolkit.Data.OracleClient</name>
+    </assembly>
+    <members>
+        <member name="T:IQToolkit.Data.OracleClient.PLSQLSkipToRowNumberRewriter">
+            <summary>
+            Rewrites take and skip expressions into uses of TSQL row_number function
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.OracleClient.PLSQLFormatter">
+            <summary>
+            Formats a query expression into PLSql language syntax
+            </summary>
+        </member>
+        <member name="T:IQToolkit.Data.OracleClient.OracleQueryProvider">
+            <summary>
+            A <see cref="T:IQToolkit.Data.DbEntityProvider"/> for Oracle databases
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.OracleClient.OracleQueryProvider.#ctor(Oracle.DataAccess.Client.OracleConnection,IQToolkit.Data.Common.QueryMapping,IQToolkit.Data.Common.QueryPolicy)">
+            <summary>
+            Constructs a <see cref="T:IQToolkit.Data.OracleClient.OracleQueryProvider"/>
+            </summary>
+        </member>
+        <member name="M:IQToolkit.Data.OracleClient.OracleQueryProvider.#ctor(System.String,IQToolkit.Data.Common.QueryMapping,IQToolkit.Data.Common.QueryPolicy)">
+            <summary>
+            Constructs a <see cref="T:IQToolkit.Data.OracleClient.OracleQueryProvider"/>
+            </summary>
+        </member>
+    </members>
+</doc>
